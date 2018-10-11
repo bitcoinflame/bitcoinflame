@@ -20,7 +20,7 @@
 
 find_path(Readline_ROOT_DIR
     NAMES include/readline/readline.h
-    PATHS /opt/local/ /usr/local/ /usr/
+    PATHS /opt/local/ /usr/local/ /usr/ /e/msys64/mingw32/
     NO_DEFAULT_PATH
 )
 
