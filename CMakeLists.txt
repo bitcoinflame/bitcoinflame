@@ -1,4 +1,4 @@
-# Copyright (c) 2017-2018, The Electroneum Project
+# Copyright (c) 2017-2018, The BitcoinFlame Project
 # Copyright (c) 2014-2017, The Monero Project
 #
 # All rights reserved.
@@ -34,7 +34,7 @@ endif()
 
 cmake_minimum_required(VERSION 2.8.7)
 
-project(electroneum)
+project(BitcoinFlame)
 
 function (die msg)
   if (NOT WIN32)
@@ -251,7 +251,7 @@ if(STATIC)
 endif()
 
 # Set default blockchain storage location:
-# memory was the default in Cryptonote before Electroneum implimented LMDB, it still works but is unneccessary.
+# memory was the default in Cryptonote before BitcoinFlame implimented LMDB, it still works but is unneccessary.
 # set(DATABASE memory)
 set(DATABASE lmdb)
 

@@ -1,32 +1,33 @@
 
-# Electroneum
+# BitcoinFlame
 
+Copyright (c) 2018-2019, The BitcoinFlame Project
 Copyright (c) 2017-2018, The Electroneum Project
 Copyright (c) 2014-2017, The Monero Project  
 Portions Copyright (c) 2012-2013, The Cryptonote developers  
 
 ## Development Resources
 
-- Web: [electroneum.com](https://electroneum.com)
-- GitHub: [https://github.com/electroneum/electroneum](https://github.com/electroneum/electroneum)
+- Web: [BitcoinFlame.com](https://bitcoinFlame.xyz)
+- GitHub: [https://github.com/bitcoinflame/bitcoinflame](https://github.com/bitcoinflame/bitcoinflame)
 
 ## Introduction
 
-Electroneum is a private, secure, untraceable, mobile based cryptocurrency. You are your bank, you control your funds, and nobody can trace your transfers unless you allow them to do so.
+BitcoinFlame is a private, secure, untraceable, mobile based cryptocurrency. You are your bank, you control your funds, and nobody can trace your transfers unless you allow them to do so.
 
-**Privacy:** Electroneum uses a cryptographically sound system to allow you to send and receive funds without your transactions being easily revealed on the blockchain (the ledger of transactions that everyone has). This ensures that your purchases, receipts, and all transfers remain absolutely private by default.
+**Privacy:** BitcoinFlame uses a cryptographically sound system to allow you to send and receive funds without your transactions being easily revealed on the blockchain (the ledger of transactions that everyone has). This ensures that your purchases, receipts, and all transfers remain absolutely private by default.
 
 **Security:** Using the power of a distributed peer-to-peer consensus network, every transaction on the network is cryptographically secured. Individual wallets have a 25 word mnemonic seed that is only displayed once, and can be written down to backup the wallet. Wallet files are encrypted with a passphrase to ensure they are useless if stolen.
 
-**Untraceability:** By taking advantage of ring signatures, a special property of a certain type of cryptography, Electroneum is able to ensure that transactions are not only untraceable, but have an optional measure of ambiguity that ensures that transactions cannot easily be tied back to an individual user or computer.
+**Untraceability:** By taking advantage of ring signatures, a special property of a certain type of cryptography, BitcoinFlame is able to ensure that transactions are not only untraceable, but have an optional measure of ambiguity that ensures that transactions cannot easily be tied back to an individual user or computer.
 
 ## About this Project
 
-This is the core implementation of Electroneum. It is open source and completely free to use without restrictions, except for those specified in the license agreement below. There are no restrictions on anyone creating an alternative implementation of Electroneum that uses the protocol and network in a compatible manner.
+This is the core implementation of BitcoinFlame. It is open source and completely free to use without restrictions, except for those specified in the license agreement below. There are no restrictions on anyone creating an alternative implementation of BitcoinFlame that uses the protocol and network in a compatible manner.
 
 As with many development projects, the repository on Github is considered to be the "staging" area for the latest changes. Before changes are merged into that branch on the main repository, they are tested by individual developers in their own branches, submitted as a pull request, and then subsequently tested by contributors who focus on testing and code reviews. That having been said, the repository should be carefully considered before using it in a production environment, unless there is a patch in the repository for a particular show-stopping issue you are experiencing. It is generally a better idea to use a tagged release for stability.
 
-**Anyone is welcome to contribute to Electroneum's codebase!** If you have a fix or code change, feel free to submit it as a pull request directly to the "master" branch. In cases where the change is relatively small or does not affect other parts of the codebase it may be merged in immediately by any one of the collaborators. On the other hand, if the change is particularly large or complex, it is expected that it will be discussed at length either well in advance of the pull request being submitted, or even directly on the pull request.
+**Anyone is welcome to contribute to BitcoinFlame's codebase!** If you have a fix or code change, feel free to submit it as a pull request directly to the "master" branch. In cases where the change is relatively small or does not affect other parts of the codebase it may be merged in immediately by any one of the collaborators. On the other hand, if the change is particularly large or complex, it is expected that it will be discussed at length either well in advance of the pull request being submitted, or even directly on the pull request.
 
 ## License
 
@@ -38,7 +39,7 @@ If you want to help out, see [CONTRIBUTING](CONTRIBUTING.md) for a set of guidel
 
 ## Scheduled software upgrades
 
-| Software upgrade block height | Date       | Fork version | Minimum Electroneum version | Recommended Electroneum version | Details                                                                            |
+| Software upgrade block height | Date       | Fork version | Minimum BitcoinFlame version | Recommended BitcoinFlame version | Details                                                                            |
 | ------------------------------ | -----------| ----------------- | ---------------------- | -------------------------- | ---------------------------------------------------------------------------------- |
 | 307500                         | 2018-05-30 | v6                | v2.0.0.0              | v2.0.0.0                  | Disable Mixin, Disable RingCT, Base Fee to 0.10 from 0.01, 120s Block Time, Anti-Asic Resistance         |
 | 324500                         | 2018-07-05 | v7                | v2.1.0.0              | v2.1.0.0                  | Enable ASIC         |
@@ -47,35 +48,35 @@ X's indicate that these details have not been determined as of commit date.
 
 ## Vulnerability Response Process
 
-See [HackerOne](https://hackerone.com/electroneum).
+See [HackerOne](https://hackerone.com/BitcoinFlame).
 
-## Installing Electroneum from a Package
+## Installing BitcoinFlame from a Package
 
 Packages are available for
 
 * Ubuntu and [snap supported](https://snapcraft.io/docs/core/install) systems, via a community contributed build.
 
-    snap install electroneum --beta
+    snap install BitcoinFlame --beta
 
 Installing a snap is very quick. Snaps are secure. They are isolated with all of their dependencies. Snaps also auto update when a new version is released.
 
 * Arch Linux (via [AUR](https://aur.archlinux.org/)):
-  - Stable release: [`electroneum`](https://aur.archlinux.org/packages/electroneum)
-  - Bleeding edge: [`electroneum-git`](https://aur.archlinux.org/packages/electroneum-git)
+  - Stable release: [`BitcoinFlame`](https://aur.archlinux.org/packages/BitcoinFlame)
+  - Bleeding edge: [`BitcoinFlame-git`](https://aur.archlinux.org/packages/BitcoinFlame-git)
 
 * Docker
 
-        docker build -t electroneum .
+        docker build -t BitcoinFlame .
      
         # either run in foreground
-        docker run -it -v /electroneum/chain:/root/.electroneum -v /electroneum/wallet:/wallet -p 26967:26967 electroneum
+        docker run -it -v /BitcoinFlame/chain:/root/.BitcoinFlame -v /BitcoinFlame/wallet:/wallet -p 26967:26967 BitcoinFlame
 
         # or in background
-        docker run -it -d -v /electroneum/chain:/root/.electroneum -v /electroneum/wallet:/wallet -p 26967:26967 electroneum
+        docker run -it -d -v /BitcoinFlame/chain:/root/.BitcoinFlame -v /BitcoinFlame/wallet:/wallet -p 26967:26967 BitcoinFlame
 
 Packaging for your favorite distribution would be a welcome contribution!
 
-## Compiling Electroneum from Source
+## Compiling BitcoinFlame from Source
 
 ### Dependencies
 
@@ -110,7 +111,7 @@ build the library binary manually. This can be done with the following command `
 
 ### Build instructions
 
-Electroneum uses the CMake build system and a top-level [Makefile](Makefile) that
+BitcoinFlame uses the CMake build system and a top-level [Makefile](Makefile) that
 invokes cmake commands as needed.
 
 #### On Linux and OS X
@@ -118,7 +119,7 @@ invokes cmake commands as needed.
 * Install the dependencies
 * Change to the root of the source code directory and build:
 
-        cd electroneum
+        cd BitcoinFlame
         make
 
     *Optional*: If your machine has several cores and enough memory, enable
@@ -128,9 +129,9 @@ invokes cmake commands as needed.
 
 * The resulting executables can be found in `build/release/bin`
 
-* Add `PATH="$PATH:$HOME/electroneum/build/release/bin"` to `.profile`
+* Add `PATH="$PATH:$HOME/BitcoinFlame/build/release/bin"` to `.profile`
 
-* Run electroneum with `electroneumd --detach`
+* Run BitcoinFlame with `BitcoinFlamed --detach`
 
 * **Optional**: build and run the test suite to verify the binaries:
 
@@ -211,15 +212,15 @@ By default, in either dynamically or statically linked builds, binaries target t
 * ```make release-static-win64``` builds binaries on 64-bit Windows portable across 64-bit Windows systems
 * ```make release-static-win32``` builds binaries on 64-bit or 32-bit Windows portable across 32-bit Windows systems
 
-## Running electroneumd
+## Running BitcoinFlamed
 
 The build places the binary in `bin/` sub-directory within the build directory
 from which cmake was invoked (repository root by default). To run in
 foreground:
 
-    ./bin/electroneumd
+    ./bin/BitcoinFlamed
 
-To list all available options, run `./bin/electroneumd --help`.  Options can be
+To list all available options, run `./bin/BitcoinFlamed --help`.  Options can be
 specified either on the command line or in a configuration file passed by the
 `--config-file` argument.  To specify an option in the configuration file, add
 a line with the syntax `argumentname=value`, where `argumentname` is the name
@@ -227,30 +228,30 @@ of the argument without the leading dashes, for example `log-level=1`.
 
 To run in background:
 
-    ./bin/electroneumd --log-file electroneumd.log --detach
+    ./bin/BitcoinFlamed --log-file BitcoinFlamed.log --detach
 
 To run as a systemd service, copy
-[electroneumd.service](utils/systemd/electroneumd.service) to `/etc/systemd/system/` and
-[electroneumd.conf](utils/conf/electroneumd.conf) to `/etc/`. The [example
-service](utils/systemd/electroneumd.service) assumes that the user `electroneum` exists
+[BitcoinFlamed.service](utils/systemd/BitcoinFlamed.service) to `/etc/systemd/system/` and
+[BitcoinFlamed.conf](utils/conf/BitcoinFlamed.conf) to `/etc/`. The [example
+service](utils/systemd/BitcoinFlamed.service) assumes that the user `BitcoinFlame` exists
 and its home is the data directory specified in the [example
-config](utils/conf/electroneumd.conf).
+config](utils/conf/BitcoinFlamed.conf).
 
 If you're on Mac, you may need to add the `--max-concurrency 1` option to
-electroneum-wallet-cli, and possibly electroneumd, if you get crashes refreshing.
+BitcoinFlame-wallet-cli, and possibly BitcoinFlamed, if you get crashes refreshing.
 
  ## Using Tor
 
- Whilst Electroneum isn't made to integrate with Tor, it can be used wrapped with torsocks, by
+ Whilst BitcoinFlame isn't made to integrate with Tor, it can be used wrapped with torsocks, by
  setting the following configuration parameters and environment variables:
 
  * `--p2p-bind-ip 127.0.0.1` on the command line or `p2p-bind-ip=127.0.0.1` in
-   electroneumd.conf to disable listening for connections on external interfaces.
- * `--no-igd` on the command line or `no-igd=1` in electroneumd.conf to disable IGD
+   BitcoinFlamed.conf to disable listening for connections on external interfaces.
+ * `--no-igd` on the command line or `no-igd=1` in BitcoinFlamed.conf to disable IGD
    (UPnP port forwarding negotiation), which is pointless with Tor.
  * `DNS_PUBLIC=tcp` or `DNS_PUBLIC=tcp://x.x.x.x` where x.x.x.x is the IP of the
    desired DNS server, for DNS requests to go over TCP, so that they are routed
-   through Tor. When IP is not specified, electroneumd uses the default list of
+   through Tor. When IP is not specified, BitcoinFlamed uses the default list of
    servers defined in [src/common/dns_utils.cpp](src/common/dns_utils.cpp).
  * `TORSOCKS_ALLOW_INBOUND=1` to tell torsocks to allow monerod to bind to interfaces
     to accept connections from the wallet. On some Linux systems, torsocks
@@ -259,11 +260,11 @@ electroneum-wallet-cli, and possibly electroneumd, if you get crashes refreshing
     connect from remote hosts. On other systems, it may be needed for local wallets
    as well.
 * Do NOT pass `--detach` when running through torsocks with systemd, (see
-  [utils/systemd/electroneumd.service](utils/systemd/electroneumd.service) for details).
+  [utils/systemd/BitcoinFlamed.service](utils/systemd/BitcoinFlamed.service) for details).
 * If you use the wallet with a Tor daemon via the loopback IP (eg, 127.0.0.1:9050),
   then use `--untrusted-daemon` unless it is your own hidden service.
- Example command line to start electroneumd through Tor:
-      DNS_PUBLIC=tcp torsocks electroneumd --p2p-bind-ip 127.0.0.1 --no-igd
+ Example command line to start BitcoinFlamed through Tor:
+      DNS_PUBLIC=tcp torsocks BitcoinFlamed --p2p-bind-ip 127.0.0.1 --no-igd
 
  ### Using Tor on Tails
 
@@ -272,5 +273,5 @@ electroneum-wallet-cli, and possibly electroneumd, if you get crashes refreshing
  allow inbound connections. Full example:
 
      sudo iptables -I OUTPUT 2 -p tcp -d 127.0.0.1 -m tcp --dport 26968 -j ACCEPT
-     DNS_PUBLIC=tcp torsocks ./electroneumd --p2p-bind-ip 127.0.0.1 --no-igd --rpc-bind-ip 127.0.0.1 \
+     DNS_PUBLIC=tcp torsocks ./BitcoinFlamed --p2p-bind-ip 127.0.0.1 --no-igd --rpc-bind-ip 127.0.0.1 \
          --data-dir /home/amnesia/Persistent/your/directory/to/the/blockchain
