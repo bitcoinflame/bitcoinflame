@@ -1,4 +1,4 @@
-// Copyrights(c) 2017-2018, The Electroneum Project
+// Copyrights(c) 2017-2018, The BitcoinFlame Project
 // Copyrights(c) 2014-2017, The Monero Project
 //
 // All rights reserved.
@@ -69,8 +69,8 @@ extern "C"
 }
 using namespace cryptonote;
 
-#undef ELECTRONEUM_DEFAULT_LOG_CATEGORY
-#define ELECTRONEUM_DEFAULT_LOG_CATEGORY "wallet.wallet2"
+#undef BITCOINFLAME_DEFAULT_LOG_CATEGORY
+#define BITCOINFLAME_DEFAULT_LOG_CATEGORY "wallet.wallet2"
 
 // used to choose when to stop adding outputs to a tx
 #define APPROXIMATE_INPUT_BYTES 80
@@ -81,11 +81,11 @@ using namespace cryptonote;
 // arbitrary, used to generate different hashes from the same input
 #define CHACHA8_KEY_TAIL 0x8c
 
-#define UNSIGNED_TX_PREFIX "Electroneum unsigned tx set\003"
-#define SIGNED_TX_PREFIX "Electroneum signed tx set\003"
+#define UNSIGNED_TX_PREFIX "BitcoinFlame unsigned tx set\003"
+#define SIGNED_TX_PREFIX "BitcoinFlame signed tx set\003"
 
 #define RECENT_OUTPUT_RATIO (0.5) // 50% of outputs are from the recent zone
-#define RECENT_OUTPUT_ZONE ((time_t)(1.8 * 86400)) // last 1.8 day makes up the recent zone (taken from electroneumlink.pdf, Miller et al)
+#define RECENT_OUTPUT_ZONE ((time_t)(1.8 * 86400)) // last 1.8 day makes up the recent zone (taken from BitcoinFlamelink.pdf, Miller et al)
 
 #define FEE_ESTIMATE_GRACE_BLOCKS 10 // estimate fee valid for that many blocks
 
@@ -99,7 +99,7 @@ using namespace cryptonote;
       ioservice.stop(); \
     } while(0)
 
-#define KEY_IMAGE_EXPORT_FILE_MAGIC "Electroneum key image export\002"
+#define KEY_IMAGE_EXPORT_FILE_MAGIC "BitcoinFlame key image export\002"
 
 namespace
 {
@@ -689,7 +689,6 @@ void wallet2::process_new_transaction(const crypto::hash &txid, const cryptonote
   std::deque<bool> output_found(tx.vout.size(), false);
   // Don't try to extract tx public key if tx has no ouputs
   size_t pk_index = 0;
-  uint64_t total_received_1 = 0;
   while (!tx.vout.empty())
   {
     // if tx.vout is not empty, we loop through all tx pubkeys
@@ -893,7 +892,6 @@ void wallet2::process_new_transaction(const crypto::hash &txid, const cryptonote
             + ", m_transfers.size() is " + boost::lexical_cast<std::string>(m_transfers.size()));
         if (kit == m_pub_keys.end())
         {
-          uint64_t amount = tx.vout[o].amount;
           if (!pool)
           {
 	    m_transfers.push_back(boost::value_initialized<transfer_details>());
@@ -905,11 +903,12 @@ void wallet2::process_new_transaction(const crypto::hash &txid, const cryptonote
 	    td.m_txid = txid;
             td.m_key_image = ki[o];
             td.m_key_image_known = !m_watch_only;
-            td.m_amount = amount;
+            td.m_amount = tx.vout[o].amount;
             td.m_pk_index = pk_index - 1;
-            if (tx.vout[o].amount == 0)
+            if (td.m_amount == 0)
             {
               td.m_mask = mask[o];
+              td.m_amount = amount[o];
               td.m_rct = true;
             }
             else if (miner_tx && tx.version == 2)
@@ -929,7 +928,6 @@ void wallet2::process_new_transaction(const crypto::hash &txid, const cryptonote
 	    if (0 != m_callback)
 	      m_callback->on_money_received(height, txid, tx, td.m_amount);
           }
-          total_received_1 += amount;
         }
 	else if (m_transfers[kit->second].m_spent || m_transfers[kit->second].amount() >= tx.vout[o].amount)
         {
@@ -937,9 +935,6 @@ void wallet2::process_new_transaction(const crypto::hash &txid, const cryptonote
               << " from received " << print_money(tx.vout[o].amount) << " output already exists with "
               << (m_transfers[kit->second].m_spent ? "spent" : "unspent") << " "
               << print_money(m_transfers[kit->second].amount()) << ", received output ignored");
-	          THROW_WALLET_EXCEPTION_IF(tx_money_got_in_outs < tx.vout[o].amount,
-              error::wallet_internal_error, "Unexpected values of new and old outputs");
-          tx_money_got_in_outs -= tx.vout[o].amount;
         }
         else
         {
@@ -947,14 +942,7 @@ void wallet2::process_new_transaction(const crypto::hash &txid, const cryptonote
               << " from received " << print_money(tx.vout[o].amount) << " output already exists with "
               << print_money(m_transfers[kit->second].amount()) << ", replacing with new output");
           // The new larger output replaced a previous smaller one
-          THROW_WALLET_EXCEPTION_IF(tx_money_got_in_outs < tx.vout[o].amount,
-              error::wallet_internal_error, "Unexpected values of new and old outputs");
-          THROW_WALLET_EXCEPTION_IF(m_transfers[kit->second].amount() > tx.vout[o].amount,
-              error::wallet_internal_error, "Unexpected values of new and old outputs");
-          tx_money_got_in_outs -= m_transfers[kit->second].amount();
-
-          uint64_t amount = tx.vout[o].amount;
-          uint64_t extra_amount = amount - m_transfers[kit->second].amount();
+          tx_money_got_in_outs -= tx.vout[o].amount;
 
           if (!pool)
           {
@@ -964,11 +952,12 @@ void wallet2::process_new_transaction(const crypto::hash &txid, const cryptonote
 	    td.m_global_output_index = o_indices[o];
 	    td.m_tx = (const cryptonote::transaction_prefix&)tx;
 	    td.m_txid = txid;
-            td.m_amount = amount;
+            td.m_amount = tx.vout[o].amount;
             td.m_pk_index = pk_index - 1;
-            if (tx.vout[o].amount == 0)
+            if (td.m_amount == 0)
             {
               td.m_mask = mask[o];
+              td.m_amount = amount[o];
               td.m_rct = true;
             }
             else if (miner_tx && tx.version == 2)
@@ -988,7 +977,6 @@ void wallet2::process_new_transaction(const crypto::hash &txid, const cryptonote
 	    if (0 != m_callback)
 	      m_callback->on_money_received(height, txid, tx, td.m_amount);
           }
-          total_received_1 += extra_amount;
         }
       }
     }
@@ -1068,19 +1056,6 @@ void wallet2::process_new_transaction(const crypto::hash &txid, const cryptonote
     else if (get_payment_id_from_tx_extra_nonce(extra_nonce.nonce, payment_id))
     {
       LOG_PRINT_L2("Found unencrypted payment ID: " << payment_id);
-    }
-
-    uint64_t total_received_2 = 0;
-    total_received_2 += tx_money_got_in_outs;
-    if (total_received_1 != total_received_2)
-    {
-      const el::Level level = el::Level::Warning;
-      MCLOG_RED(level, "global", "**********************************************************************");
-      MCLOG_RED(level, "global", "Consistency failure in amounts received");
-      MCLOG_RED(level, "global", "Check transaction " << txid);
-      MCLOG_RED(level, "global", "**********************************************************************");
-      exit(1);
-      return;
     }
 
     payment_details payment;
@@ -3523,7 +3498,7 @@ uint64_t wallet2::get_fee_multiplier(uint32_t priority, int fee_algorithm)
   if (fee_algorithm == -1)
     fee_algorithm = get_fee_algorithm();
 
-  // 0 -> default (here, a v5 fork means priority 2, but ETN V6 onwards means priority 1)
+  // 0 -> default (here, a v5 fork means priority 2, but BTCF V6 onwards means priority 1)
   if (priority == 0)
     priority = m_default_priority;
   if (priority == 0)
@@ -5166,7 +5141,7 @@ uint64_t wallet2::get_approximate_blockchain_height() const
   // avg seconds per block
   const int seconds_per_block = DIFFICULTY_TARGET_V6;
   // Calculated blockchain height
-  uint64_t approx_blockchain_height = fork_block + (time(NULL) - fork_time)/seconds_per_block;
+  uint64_t approx_blockchain_height = 0;
   LOG_PRINT_L2("Calculated blockchain height: " << approx_blockchain_height);
   return approx_blockchain_height;
 }
@@ -5608,7 +5583,7 @@ std::string wallet2::make_uri(const std::string &address, const std::string &pay
     }
   }
 
-  std::string uri = "electroneum:" + address;
+  std::string uri = "BitcoinFlame:" + address;
   unsigned int n_fields = 0;
 
   if (!payment_id.empty())
@@ -5637,9 +5612,9 @@ std::string wallet2::make_uri(const std::string &address, const std::string &pay
 //----------------------------------------------------------------------------------------------------
 bool wallet2::parse_uri(const std::string &uri, std::string &address, std::string &payment_id, uint64_t &amount, std::string &tx_description, std::string &recipient_name, std::vector<std::string> &unknown_parameters, std::string &error)
 {
-  if (uri.substr(0, 12) != "electroneum:")
+  if (uri.substr(0, 12) != "BitcoinFlame:")
   {
-    error = std::string("URI has wrong scheme (expected \"electroneum:\"): ") + uri;
+    error = std::string("URI has wrong scheme (expected \"BitcoinFlame:\"): ") + uri;
     return false;
   }
 

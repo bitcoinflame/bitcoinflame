@@ -1,4 +1,4 @@
-// Copyright (c) 2016, Electroneum Research Labs
+// Copyright (c) 2016, BitcoinFlame Research Labs
 //
 // Author: Shen Noether <shen.noether@gmx.com>
 // 
@@ -32,8 +32,8 @@
 using namespace crypto;
 using namespace std;
 
-#undef ELECTRONEUM_DEFAULT_LOG_CATEGORY
-#define ELECTRONEUM_DEFAULT_LOG_CATEGORY "ringct"
+#undef BITCOINFLAME_DEFAULT_LOG_CATEGORY
+#define BITCOINFLAME_DEFAULT_LOG_CATEGORY "ringct"
 
 namespace rct {
 

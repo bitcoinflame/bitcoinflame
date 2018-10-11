@@ -1,4 +1,4 @@
-// Copyrights(c) 2017-2018, The Electroneum Project
+// Copyrights(c) 2017-2018, The BitcoinFlame Project
 // Copyrights(c) 2014-2017, The Monero Project
 // 
 // All rights reserved.
@@ -47,8 +47,8 @@ static const char *db_types[] = {
   NULL
 };
 
-#undef ELECTRONEUM_DEFAULT_LOG_CATEGORY
-#define ELECTRONEUM_DEFAULT_LOG_CATEGORY "blockchain.db"
+#undef BITCOINFLAME_DEFAULT_LOG_CATEGORY
+#define BITCOINFLAME_DEFAULT_LOG_CATEGORY "blockchain.db"
 
 using epee::string_tools::pod_to_hex;
 

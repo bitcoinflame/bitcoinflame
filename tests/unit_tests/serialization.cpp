@@ -1,4 +1,4 @@
-// Copyrights(c) 2017-2018, The Electroneum Project
+// Copyrights(c) 2017-2018, The BitcoinFlame Project
 // Copyrights(c) 2014-2017, The Monero Project
 // 
 // All rights reserved.
@@ -667,7 +667,7 @@ TEST(Serialization, serializes_ringct_types)
   ASSERT_TRUE(blob == blob2);
 }
 
-// ToDo : Change this test to test features relevant to the Electroneum Project (Wallet needs creating and such)
+// ToDo : Change this test to test features relevant to the BitcoinFlame Project (Wallet needs creating and such)
 TEST(Serialization, portability_wallet)
 {
  const bool testnet = true;
@@ -789,8 +789,8 @@ TEST(Serialization, portability_wallet)
  }
 }
 
-// ToDo : Change this test to test features relevant to the Electroneum Project (Wallet needs creating and such)
-#define OUTPUT_EXPORT_FILE_MAGIC "Electroneum output export\003"
+// ToDo : Change this test to test features relevant to the BitcoinFlame Project (Wallet needs creating and such)
+#define OUTPUT_EXPORT_FILE_MAGIC "BitcoinFlame output export\003"
 TEST(Serialization, portability_outputs)
 {
  // read file
@@ -906,11 +906,11 @@ TEST(Serialization, portability_outputs)
  ASSERT_EQ(td2.m_pk_index, 0);
 }
 
-// ToDo : Change this test to test features relevant to the Electroneum Project (Wallet needs creating and such)
-#define UNSIGNED_TX_PREFIX "Electroneum unsigned tx set\003"
+// ToDo : Change this test to test features relevant to the BitcoinFlame Project (Wallet needs creating and such)
+#define UNSIGNED_TX_PREFIX "BitcoinFlame unsigned tx set\003"
 TEST(Serialization, portability_unsigned_tx)
 {
- const string filename = epee::string_tools::get_current_module_folder() + "/../../../../tests/data/unsigned_electroneum_tx";
+ const string filename = epee::string_tools::get_current_module_folder() + "/../../../../tests/data/unsigned_BitcoinFlame_tx";
  std::string s;
  const bool testnet = true;
  bool r = epee::file_io_utils::load_file_to_string(filename, s);
@@ -990,15 +990,15 @@ TEST(Serialization, portability_unsigned_tx)
  ASSERT_TRUE(epee::string_tools::pod_to_hex(tse.mask) == "789bafff169ef206aa21219342c69ca52ce1d78d776c10b21d14bdd960fc7703");
  // tcd.change_dts
  ASSERT_TRUE(tcd.change_dts.amount == 9631208773403);
- ASSERT_TRUE(cryptonote::get_account_address_as_str(testnet, tcd.change_dts.addr) == "etnjxQKSvwhVxnJ4VatxuJebGw3bk6EKLYVmksCHY7BTRiNiZFKWbhwVgHHBqwGwfuAqhjDJpNzDX1jkuKmBxSXU6bAiwJfVue");
+ ASSERT_TRUE(cryptonote::get_account_address_as_str(testnet, tcd.change_dts.addr) == "44LScvdQydZ4HGYSZ1tmByeqUVXcdhj2Yc9DE6ymtt9gcgtmJ9heTRbcSANUGXNmYUJMUBNwXgQQeeFPhzLH5eGPKcF2Ybm");
  // tcd.splitted_dsts
  ASSERT_TRUE(tcd.splitted_dsts.size() == 2);
  auto& splitted_dst0 = tcd.splitted_dsts[0];
  auto& splitted_dst1 = tcd.splitted_dsts[1];
  ASSERT_TRUE(splitted_dst0.amount == 1400000000000);
  ASSERT_TRUE(splitted_dst1.amount == 9631208773403);
- ASSERT_TRUE(cryptonote::get_account_address_as_str(testnet, splitted_dst0.addr) == "etnkCu7s6mRGi3RJm5CKgZSFsJhbrhb2XRqPSdBqMiNnf2A7Nw3kncTLhZ3SbVJ2bH1W7pPq9LExDHVbHu9fTZJv1HeRSuyVUc");
- ASSERT_TRUE(cryptonote::get_account_address_as_str(testnet, splitted_dst1.addr) == "etnjxQKSvwhVxnJ4VatxuJebGw3bk6EKLYVmksCHY7BTRiNiZFKWbhwVgHHBqwGwfuAqhjDJpNzDX1jkuKmBxSXU6bAiwJfVue");
+ ASSERT_TRUE(cryptonote::get_account_address_as_str(testnet, splitted_dst0.addr) == "44LScvdQydZ4HGYSZ1tmByeqUVXcdhj2Yc9DE6ymtt9gcgtmJ9heTRbcSANUGXNmYUJMUBNwXgQQeeFPhzLH5eGPKcF2Ybm");
+ ASSERT_TRUE(cryptonote::get_account_address_as_str(testnet, splitted_dst1.addr) == "44LScvdQydZ4HGYSZ1tmByeqUVXcdhj2Yc9DE6ymtt9gcgtmJ9heTRbcSANUGXNmYUJMUBNwXgQQeeFPhzLH5eGPKcF2Ybm");
  // tcd.selected_transfers
  ASSERT_TRUE(tcd.selected_transfers.size() == 1);
  ASSERT_TRUE(tcd.selected_transfers.front() == 2);
@@ -1011,7 +1011,7 @@ TEST(Serialization, portability_unsigned_tx)
  ASSERT_TRUE(tcd.dests.size() == 1);
  auto& dest = tcd.dests[0];
  ASSERT_TRUE(dest.amount == 1400000000000);
- ASSERT_TRUE(cryptonote::get_account_address_as_str(testnet, dest.addr) == "etnkCu7s6mRGi3RJm5CKgZSFsJhbrhb2XRqPSdBqMiNnf2A7Nw3kncTLhZ3SbVJ2bH1W7pPq9LExDHVbHu9fTZJv1HeRSuyVUc");
+ ASSERT_TRUE(cryptonote::get_account_address_as_str(testnet, dest.addr) == "44LScvdQydZ4HGYSZ1tmByeqUVXcdhj2Yc9DE6ymtt9gcgtmJ9heTRbcSANUGXNmYUJMUBNwXgQQeeFPhzLH5eGPKcF2Ybm");
  // transfers
  ASSERT_TRUE(exported_txs.transfers.size() == 3);
  auto& td0 = exported_txs.transfers[0];
@@ -1055,11 +1055,11 @@ TEST(Serialization, portability_unsigned_tx)
  ASSERT_TRUE(td2.m_pk_index == 0);
 }
 
-// ToDo : Change this test to test features relevant to the Electroneum Project (Wallet needs creating and such)
-#define SIGNED_TX_PREFIX "Electroneum signed tx set\003"
+// ToDo : Change this test to test features relevant to the BitcoinFlame Project (Wallet needs creating and such)
+#define SIGNED_TX_PREFIX "BitcoinFlame signed tx set\003"
 TEST(Serialization, portability_signed_tx)
 {
- const string filename = epee::string_tools::get_current_module_folder() + "/../../../../tests/data/signed_electroneum_tx";
+ const string filename = epee::string_tools::get_current_module_folder() + "/../../../../tests/data/signed_BitcoinFlame_tx";
  const bool testnet = true;
  std::string s;
  bool r = epee::file_io_utils::load_file_to_string(filename, s);
@@ -1105,7 +1105,7 @@ TEST(Serialization, portability_signed_tx)
  ASSERT_FALSE(ptx.dust_added_to_fee);
  // ptx.change.{amount, addr}
  ASSERT_TRUE(ptx.change_dts.amount == 9631208773403);
- ASSERT_TRUE(cryptonote::get_account_address_as_str(testnet, ptx.change_dts.addr) == "etnjxQKSvwhVxnJ4VatxuJebGw3bk6EKLYVmksCHY7BTRiNiZFKWbhwVgHHBqwGwfuAqhjDJpNzDX1jkuKmBxSXU6bAiwJfVue");
+ ASSERT_TRUE(cryptonote::get_account_address_as_str(testnet, ptx.change_dts.addr) == "44LScvdQydZ4HGYSZ1tmByeqUVXcdhj2Yc9DE6ymtt9gcgtmJ9heTRbcSANUGXNmYUJMUBNwXgQQeeFPhzLH5eGPKcF2Ybm");
  // ptx.selected_transfers
  ASSERT_TRUE(ptx.selected_transfers.size() == 1);
  ASSERT_TRUE(ptx.selected_transfers.front() == 2);
@@ -1115,7 +1115,7 @@ TEST(Serialization, portability_signed_tx)
  // ptx.dests
  ASSERT_TRUE(ptx.dests.size() == 1);
  ASSERT_TRUE(ptx.dests[0].amount == 1400000000000);
- ASSERT_TRUE(cryptonote::get_account_address_as_str(testnet, ptx.dests[0].addr) == "etnkCu7s6mRGi3RJm5CKgZSFsJhbrhb2XRqPSdBqMiNnf2A7Nw3kncTLhZ3SbVJ2bH1W7pPq9LExDHVbHu9fTZJv1HeRSuyVUc");
+ ASSERT_TRUE(cryptonote::get_account_address_as_str(testnet, ptx.dests[0].addr) == "44LScvdQydZ4HGYSZ1tmByeqUVXcdhj2Yc9DE6ymtt9gcgtmJ9heTRbcSANUGXNmYUJMUBNwXgQQeeFPhzLH5eGPKcF2Ybm");
  // ptx.construction_data
  auto& tcd = ptx.construction_data;
  ASSERT_TRUE(tcd.sources.size() == 1);
@@ -1146,15 +1146,15 @@ TEST(Serialization, portability_signed_tx)
  ASSERT_TRUE(epee::string_tools::pod_to_hex(tse.mask) == "789bafff169ef206aa21219342c69ca52ce1d78d776c10b21d14bdd960fc7703");
  // ptx.construction_data.change_dts
  ASSERT_TRUE(tcd.change_dts.amount == 9631208773403);
- ASSERT_TRUE(cryptonote::get_account_address_as_str(testnet, tcd.change_dts.addr) == "etnjxQKSvwhVxnJ4VatxuJebGw3bk6EKLYVmksCHY7BTRiNiZFKWbhwVgHHBqwGwfuAqhjDJpNzDX1jkuKmBxSXU6bAiwJfVue");
+ ASSERT_TRUE(cryptonote::get_account_address_as_str(testnet, tcd.change_dts.addr) == "44LScvdQydZ4HGYSZ1tmByeqUVXcdhj2Yc9DE6ymtt9gcgtmJ9heTRbcSANUGXNmYUJMUBNwXgQQeeFPhzLH5eGPKcF2Ybm");
  // ptx.construction_data.splitted_dsts
  ASSERT_TRUE(tcd.splitted_dsts.size() == 2);
  auto& splitted_dst0 = tcd.splitted_dsts[0];
  auto& splitted_dst1 = tcd.splitted_dsts[1];
  ASSERT_TRUE(splitted_dst0.amount == 1400000000000);
  ASSERT_TRUE(splitted_dst1.amount == 9631208773403);
- ASSERT_TRUE(cryptonote::get_account_address_as_str(testnet, splitted_dst0.addr) == "etnkCu7s6mRGi3RJm5CKgZSFsJhbrhb2XRqPSdBqMiNnf2A7Nw3kncTLhZ3SbVJ2bH1W7pPq9LExDHVbHu9fTZJv1HeRSuyVUc");
- ASSERT_TRUE(cryptonote::get_account_address_as_str(testnet, splitted_dst1.addr) == "etnjxQKSvwhVxnJ4VatxuJebGw3bk6EKLYVmksCHY7BTRiNiZFKWbhwVgHHBqwGwfuAqhjDJpNzDX1jkuKmBxSXU6bAiwJfVue");
+ ASSERT_TRUE(cryptonote::get_account_address_as_str(testnet, splitted_dst0.addr) == "44LScvdQydZ4HGYSZ1tmByeqUVXcdhj2Yc9DE6ymtt9gcgtmJ9heTRbcSANUGXNmYUJMUBNwXgQQeeFPhzLH5eGPKcF2Ybm");
+ ASSERT_TRUE(cryptonote::get_account_address_as_str(testnet, splitted_dst1.addr) == "44LScvdQydZ4HGYSZ1tmByeqUVXcdhj2Yc9DE6ymtt9gcgtmJ9heTRbcSANUGXNmYUJMUBNwXgQQeeFPhzLH5eGPKcF2Ybm");
  // ptx.construction_data.selected_transfers
  ASSERT_TRUE(tcd.selected_transfers.size() == 1);
  ASSERT_TRUE(tcd.selected_transfers.front() == 2);
@@ -1167,7 +1167,7 @@ TEST(Serialization, portability_signed_tx)
  ASSERT_TRUE(tcd.dests.size() == 1);
  auto& dest = tcd.dests[0];
  ASSERT_TRUE(dest.amount == 1400000000000);
- ASSERT_TRUE(cryptonote::get_account_address_as_str(testnet, dest.addr) == "etnkCu7s6mRGi3RJm5CKgZSFsJhbrhb2XRqPSdBqMiNnf2A7Nw3kncTLhZ3SbVJ2bH1W7pPq9LExDHVbHu9fTZJv1HeRSuyVUc");
+ ASSERT_TRUE(cryptonote::get_account_address_as_str(testnet, dest.addr) == "44LScvdQydZ4HGYSZ1tmByeqUVXcdhj2Yc9DE6ymtt9gcgtmJ9heTRbcSANUGXNmYUJMUBNwXgQQeeFPhzLH5eGPKcF2Ybm");
  // key_images
  ASSERT_TRUE(exported_txs.key_images.size() == 3);
  auto& ki0 = exported_txs.key_images[0];

@@ -1,4 +1,4 @@
-// Copyrights(c) 2017-2018, The Electroneum Project
+// Copyrights(c) 2017-2018, The BitcoinFlame Project
 // Copyrights(c) 2014-2017, The Monero Project
 //
 // All rights reserved.
@@ -46,10 +46,10 @@
 using namespace std;
 using namespace cryptonote;
 
-#undef ELECTRONEUM_DEFAULT_LOG_CATEGORY
-#define ELECTRONEUM_DEFAULT_LOG_CATEGORY "WalletAPI"
+#undef BITCOINFLAME_DEFAULT_LOG_CATEGORY
+#define BITCOINFLAME_DEFAULT_LOG_CATEGORY "WalletAPI"
 
-namespace Electroneum {
+namespace BitcoinFlame {
 
 namespace {
     // copy-pasted from simplewallet
@@ -1448,4 +1448,4 @@ bool WalletImpl::useForkRules(uint8_t version, int64_t early_blocks) const
 
 } // namespace
 
-namespace Bitelectroneum = Electroneum;
+namespace BitBitcoinFlame = BitcoinFlame;

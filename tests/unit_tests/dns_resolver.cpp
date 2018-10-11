@@ -141,22 +141,22 @@ TEST(DNSResolver, GetTXTRecord)
 {
   bool avail, valid;
 
-  std::vector<std::string> records = tools::DNSResolver::instance().get_txt_record("donate.electroneumpulse.com", avail, valid);
+  std::vector<std::string> records = tools::DNSResolver::instance().get_txt_record("donate.BitcoinFlamepulse.com", avail, valid);
 
   EXPECT_NE(0, records.size());
 
   for (auto& rec : records)
   {
-    std::cout << "TXT record for donate.electroneumpulse.com: " << rec << std::endl;
+    std::cout << "TXT record for donate.BitcoinFlamepulse.com: " << rec << std::endl;
   }
 
   // replace first @ with .
-  std::string addr = tools::DNSResolver::instance().get_dns_format_from_oa_address("donate@electroneumpulse.com");
-  EXPECT_STREQ("donate.electroneumpulse.com", addr.c_str());
+  std::string addr = tools::DNSResolver::instance().get_dns_format_from_oa_address("donate@BitcoinFlamepulse.com");
+  EXPECT_STREQ("donate.BitcoinFlamepulse.com", addr.c_str());
 
   // no change
-  addr = tools::DNSResolver::instance().get_dns_format_from_oa_address("donate.electroneumpulse.com");
-  EXPECT_STREQ("donate.electroneumpulse.com", addr.c_str());
+  addr = tools::DNSResolver::instance().get_dns_format_from_oa_address("donate.BitcoinFlamepulse.com");
+  EXPECT_STREQ("donate.BitcoinFlamepulse.com", addr.c_str());
 }
 
 bool is_equal(const char *s, const std::vector<std::string> &v) { return v.size() == 1 && v[0] == s; }

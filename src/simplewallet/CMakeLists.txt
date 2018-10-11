@@ -1,4 +1,4 @@
-# Copyright (c) 2017-2018, The Electroneum Project
+# Copyright (c) 2017-2018, The BitcoinFlame Project
 # Copyright (c) 2014-2017, The Monero Project
 #
 # All rights reserved.
@@ -35,9 +35,9 @@ set(simplewallet_headers)
 set(simplewallet_private_headers
   simplewallet.h)
 
-electroneum_private_headers(simplewallet
+BitcoinFlame_private_headers(simplewallet
   ${simplewallet_private_headers})
-electroneum_add_executable(simplewallet
+BitcoinFlame_add_executable(simplewallet
   ${simplewallet_sources}
   ${simplewallet_headers}
   ${simplewallet_private_headers})
@@ -60,5 +60,5 @@ add_dependencies(simplewallet
   version)
 set_property(TARGET simplewallet
   PROPERTY
-    OUTPUT_NAME "electroneum-wallet-cli")
+    OUTPUT_NAME "BitcoinFlame-wallet-cli")
 install(TARGETS simplewallet DESTINATION bin)

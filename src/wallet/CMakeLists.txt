@@ -1,4 +1,4 @@
-# Copyright (c) 2017-2018, The Electroneum Project
+# Copyright (c) 2017-2018, The BitcoinFlame Project
 # Copyright (c) 2014-2017, The Monero Project
 #
 # All rights reserved.
@@ -65,9 +65,9 @@ set(wallet_private_headers
   api/address_book.h
   api/unsigned_transaction.h)
 
-electroneum_private_headers(wallet
+BitcoinFlame_private_headers(wallet
   ${wallet_private_headers})
-electroneum_add_library(wallet
+BitcoinFlame_add_library(wallet
   ${wallet_sources}
   ${wallet_api_headers}
   ${wallet_private_headers})
@@ -96,9 +96,9 @@ if (NOT BUILD_GUI_DEPS)
   set(wallet_rpc_private_headers
     wallet_rpc_server.h)
 
-  electroneum_private_headers(wallet_rpc_server
+  BitcoinFlame_private_headers(wallet_rpc_server
     ${wallet_rpc_private_headers})
-  electroneum_add_executable(wallet_rpc_server
+  BitcoinFlame_add_executable(wallet_rpc_server
     ${wallet_rpc_sources}
     ${wallet_rpc_headers}
     ${wallet_rpc_private_headers})
@@ -120,7 +120,7 @@ if (NOT BUILD_GUI_DEPS)
   add_dependencies(wallet_rpc_server version)
   set_property(TARGET wallet_rpc_server
     PROPERTY
-      OUTPUT_NAME "electroneum-wallet-rpc")
+      OUTPUT_NAME "BitcoinFlame-wallet-rpc")
   install(TARGETS wallet_rpc_server DESTINATION bin)
 endif()
 

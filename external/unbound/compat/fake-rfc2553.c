@@ -42,7 +42,7 @@
 #include <stdlib.h>
 #include "compat/fake-rfc2553.h"
 
-#ifndef HAVE_GETNAMEINFO
+#ifndef HAVE_GBTCFAMEINFO
 int getnameinfo(const struct sockaddr *sa, size_t ATTR_UNUSED(salen), char *host, 
                 size_t hostlen, char *serv, size_t servlen, int flags)
 {
@@ -77,7 +77,7 @@ int getnameinfo(const struct sockaddr *sa, size_t ATTR_UNUSED(salen), char *host
 	}
 	return (0);
 }
-#endif /* !HAVE_GETNAMEINFO */
+#endif /* !HAVE_GBTCFAMEINFO */
 
 #ifndef HAVE_GAI_STRERROR
 #ifdef HAVE_CONST_GAI_STRERROR_PROTO

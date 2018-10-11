@@ -1,4 +1,4 @@
-// Copyrights(c) 2017-2018, The Electroneum Project
+// Copyrights(c) 2017-2018, The BitcoinFlame Project
 // Copyrights(c) 2014-2017, The Monero Project
 //
 // All rights reserved.
@@ -43,7 +43,7 @@
 
 using namespace epee;
 
-namespace Electroneum {
+namespace BitcoinFlame {
 
 TransactionHistory::~TransactionHistory() {}
 
@@ -238,4 +238,4 @@ void TransactionHistoryImpl::refresh()
 
 } // namespace
 
-namespace Bitelectroneum = Electroneum;
+namespace BitBitcoinFlame = BitcoinFlame;

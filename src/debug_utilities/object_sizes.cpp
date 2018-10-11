@@ -1,4 +1,4 @@
-// Copyright (c) 2017-2018, The Electroneum Project
+// Copyright (c) 2017-2018, The BitcoinFlame Project
 // Copyright (c) 2017, The Monero Project
 //
 // All rights reserved.
@@ -44,8 +44,8 @@
 #include "wallet/api/unsigned_transaction.h"
 #include "wallet/api/pending_transaction.h"
 
-#undef ELECTRONEUM_DEFAULT_LOG_CATEGORY
-#define ELECTRONEUM_DEFAULT_LOG_CATEGORY "debugtools.objectsizes"
+#undef BITCOINFLAME_DEFAULT_LOG_CATEGORY
+#define BITCOINFLAME_DEFAULT_LOG_CATEGORY "debugtools.objectsizes"
 
 class size_logger
 {
@@ -106,12 +106,12 @@ int main(int argc, char* argv[])
   SL(tools::wallet2::unsigned_tx_set);
   SL(tools::wallet2::signed_tx_set);
 
-  SL(Electroneum::WalletImpl);
-  SL(Electroneum::AddressBookRow);
-  SL(Electroneum::TransactionInfoImpl);
-  SL(Electroneum::TransactionHistoryImpl);
-  SL(Electroneum::PendingTransactionImpl);
-  SL(Electroneum::UnsignedTransactionImpl);
+  SL(BitcoinFlame::WalletImpl);
+  SL(BitcoinFlame::AddressBookRow);
+  SL(BitcoinFlame::TransactionInfoImpl);
+  SL(BitcoinFlame::TransactionHistoryImpl);
+  SL(BitcoinFlame::PendingTransactionImpl);
+  SL(BitcoinFlame::UnsignedTransactionImpl);
 
   return 0;
 }

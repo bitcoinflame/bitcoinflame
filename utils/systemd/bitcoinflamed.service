@@ -1,0 +1,17 @@
+[Unit]
+Description=BitcoinFlame Full Node
+After=network.target
+
+[Service]
+User=BitcoinFlame
+Group=BitcoinFlame
+WorkingDirectory=~
+
+Type=forking
+PIDFile=/var/run/BitcoinFlamed.pid
+
+ExecStart=/usr/bin/BitcoinFlamed --config-file /etc/BitcoinFlamed.conf \
+    --detach --pidfile /var/run/BitcoinFlamed.pid
+
+[Install]
+WantedBy=multi-user.target

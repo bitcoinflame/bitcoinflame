@@ -1,4 +1,4 @@
-// Copyrights(c) 2017-2018, The Electroneum Project
+// Copyrights(c) 2017-2018, The BitcoinFlame Project
 // Copyrights(c) 2014-2017, The Monero Project
 // 
 // All rights reserved.
@@ -51,8 +51,8 @@ using namespace epee;
 #include "rpc/rpc_args.h"
 #include "rpc/core_rpc_server_commands_defs.h"
 
-#undef ELECTRONEUM_DEFAULT_LOG_CATEGORY
-#define ELECTRONEUM_DEFAULT_LOG_CATEGORY "wallet.rpc"
+#undef BITCOINFLAME_DEFAULT_LOG_CATEGORY
+#define BITCOINFLAME_DEFAULT_LOG_CATEGORY "wallet.rpc"
 
 namespace
 {
@@ -61,7 +61,7 @@ namespace
   const command_line::arg_descriptor<bool> arg_trusted_daemon = {"trusted-daemon", "Enable commands which rely on a trusted daemon", false};
   const command_line::arg_descriptor<std::string> arg_wallet_dir = {"wallet-dir", "Directory for newly created wallets"};
 
-  constexpr const char default_rpc_username[] = "electroneum";
+  constexpr const char default_rpc_username[] = "BitcoinFlame";
 }
 
 namespace tools
@@ -193,7 +193,7 @@ namespace tools
       }
       assert(bool(http_login));
 
-      std::string temp = "electroneum-wallet-rpc." + bind_port + ".login";
+      std::string temp = "BitcoinFlame-wallet-rpc." + bind_port + ".login";
       const auto cookie = tools::create_private_file(temp);
       if (!cookie)
       {
@@ -365,7 +365,7 @@ namespace tools
           }
           if (addresses.empty())
           {
-            er.message = std::string("No Electroneum address found at ") + url;
+            er.message = std::string("No BitcoinFlame address found at ") + url;
             return {};
           }
           return addresses[0];
@@ -1045,7 +1045,7 @@ namespace tools
         }
         if (addresses.empty())
         {
-          er.message = std::string("No Electroneum address found at ") + url;
+          er.message = std::string("No BitcoinFlame address found at ") + url;
           return {};
         }
         return addresses[0];
@@ -1482,7 +1482,7 @@ namespace tools
         }
         if (addresses.empty())
         {
-          er.message = std::string("No Electroneum address found at ") + url;
+          er.message = std::string("No BitcoinFlame address found at ") + url;
           return {};
         }
         return addresses[0];
@@ -1907,10 +1907,10 @@ int main(int argc, char** argv) {
 
   const auto vm = wallet_args::main(
     argc, argv,
-    "electroneum-wallet-rpc [--wallet-file=<file>|--generate-from-json=<file>|--wallet-dir=<directory>] [--rpc-bind-port=<port>]",
+    "BitcoinFlame-wallet-rpc [--wallet-file=<file>|--generate-from-json=<file>|--wallet-dir=<directory>] [--rpc-bind-port=<port>]",
     desc_params,
     po::positional_options_description(),
-    "electroneum-wallet-rpc.log",
+    "BitcoinFlame-wallet-rpc.log",
     true
   );
   if (!vm)

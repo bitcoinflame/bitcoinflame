@@ -1,4 +1,4 @@
-# Copyright (c) 2017-2018, The Electroneum Project
+# Copyright (c) 2017-2018, The BitcoinFlame Project
 # Copyright (c) 2014-2017, The Monero Project
 #
 # All rights reserved.
@@ -49,9 +49,9 @@ set(mnemonics_private_headers
   spanish.h
   esperanto.h)
 
-electroneum_private_headers(mnemonics
+BitcoinFlame_private_headers(mnemonics
   ${mnemonics_private_headers})
-electroneum_add_library(mnemonics
+BitcoinFlame_add_library(mnemonics
   ${mnemonics_sources}
   ${mnemonics_headers}
   ${mnemonics_private_headers})

@@ -1,4 +1,4 @@
-# Electroneum Blockchain Utilities
+# BitcoinFlame Blockchain Utilities
 
 Copyright (c) 2014-2017, The Monero Project
 
@@ -12,16 +12,16 @@ See also each utility's "--help" option.
 
 ### Export an existing blockchain database
 
-`$ electroneum-blockchain-export`
+`$ BitcoinFlame-blockchain-export`
 
-This loads the existing blockchain and exports it to `$ELECTRONEUM_DATA_DIR/export/blockchain.raw`
+This loads the existing blockchain and exports it to `$BITCOINFLAME_DATA_DIR/export/blockchain.raw`
 
 ### Import the exported file
 
-`$ electroneum-blockchain-import`
+`$ BitcoinFlame-blockchain-import`
 
-This imports blocks from `$ELECTRONEUM_DATA_DIR/export/blockchain.raw` (exported using the
-`electroneum-blockchain-export` tool as described above) into the current database.
+This imports blocks from `$BITCOINFLAME_DATA_DIR/export/blockchain.raw` (exported using the
+`BitcoinFlame-blockchain-export` tool as described above) into the current database.
 
 Defaults: `--batch on`, `--batch size 20000`, `--verify on`
 
@@ -30,14 +30,14 @@ Batch size refers to number of blocks and can be adjusted for performance based 
 Verification should only be turned off if importing from a trusted blockchain.
 
 If you encounter an error like "resizing not supported in batch mode", you can just re-run
-the `electroneum-blockchain-import` command again, and it will restart from where it left off.
+the `BitcoinFlame-blockchain-import` command again, and it will restart from where it left off.
 
 ```bash
 ## use default settings to import blockchain.raw into database
-$ electroneum-blockchain-import
+$ BitcoinFlame-blockchain-import
 
 ## fast import with large batch size, database mode "fastest", verification off
-$ electroneum-blockchain-import --batch-size 20000 --database lmdb#fastest --verify off
+$ BitcoinFlame-blockchain-import --batch-size 20000 --database lmdb#fastest --verify off
 
 ```
 
@@ -80,9 +80,9 @@ LMDB flags (more than one may be specified):
 ## Examples:
 
 ```
-$ electroneum-blockchain-import --database lmdb#fastest
+$ BitcoinFlame-blockchain-import --database lmdb#fastest
 
-$ electroneum-blockchain-import --database lmdb#nosync
+$ BitcoinFlame-blockchain-import --database lmdb#nosync
 
-$ electroneum-blockchain-import --database lmdb#nosync,nometasync
+$ BitcoinFlame-blockchain-import --database lmdb#nosync,nometasync
 ```

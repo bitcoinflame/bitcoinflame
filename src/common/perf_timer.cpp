@@ -1,4 +1,4 @@
-// Copyright (c) 2017-2018, The Electroneum Project
+// Copyright (c) 2017-2018, The BitcoinFlame Project
 // Copyright (c) 2016, The Monero Project
 // 
 // All rights reserved.
@@ -29,8 +29,8 @@
 
 #include "perf_timer.h"
 
-#undef ELECTRONEUM_DEFAULT_LOG_CATEGORY
-#define ELECTRONEUM_DEFAULT_LOG_CATEGORY "perf"
+#undef BITCOINFLAME_DEFAULT_LOG_CATEGORY
+#define BITCOINFLAME_DEFAULT_LOG_CATEGORY "perf"
 
 namespace tools
 {

@@ -1,4 +1,4 @@
-// Copyrights(c) 2017-2018, The Electroneum Project
+// Copyrights(c) 2017-2018, The BitcoinFlame Project
 // Copyrights(c) 2014-2017, The Monero Project
 //
 // All rights reserved.
@@ -44,8 +44,8 @@ using namespace epee;
 #include "common/int-util.h"
 #include "common/dns_utils.h"
 
-#undef ELECTRONEUM_DEFAULT_LOG_CATEGORY
-#define ELECTRONEUM_DEFAULT_LOG_CATEGORY "cn"
+#undef BITCOINFLAME_DEFAULT_LOG_CATEGORY
+#define BITCOINFLAME_DEFAULT_LOG_CATEGORY "cn"
 
 namespace cryptonote {
 
@@ -97,7 +97,7 @@ namespace cryptonote {
     const int emission_speed_factor = EMISSION_SPEED_FACTOR_PER_MINUTE - (target_minutes-1);
     uint64_t full_reward_zone = get_min_block_size(version);
 
-    const uint64_t premine = 1260000000000U;
+    const uint64_t premine = 105000000000U;
     if (median_size > 0 && already_generated_coins < premine && !(current_block_size >= 2 * full_reward_zone)) {
       reward = premine;
       return true;

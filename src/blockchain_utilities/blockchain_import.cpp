@@ -1,4 +1,4 @@
-// Copyrights(c) 2017-2018, The Electroneum Project
+// Copyrights(c) 2017-2018, The BitcoinFlame Project
 // Copyrights(c) 2014-2017, The Monero Project
 //
 // All rights reserved.
@@ -43,8 +43,8 @@
 #include "blockchain_db/db_types.h"
 #include "cryptonote_core/cryptonote_core.h"
 
-#undef ELECTRONEUM_DEFAULT_LOG_CATEGORY
-#define ELECTRONEUM_DEFAULT_LOG_CATEGORY "bcutil"
+#undef BITCOINFLAME_DEFAULT_LOG_CATEGORY
+#define BITCOINFLAME_DEFAULT_LOG_CATEGORY "bcutil"
 
 namespace
 {
@@ -605,7 +605,7 @@ int main(int argc, char* argv[])
 
   if (command_line::get_arg(vm, command_line::arg_help))
   {
-    std::cout << "Electroneum '" << ELECTRONEUM_RELEASE_NAME << "' (v" << ELECTRONEUM_VERSION_FULL << ")" << ENDL << ENDL;
+    std::cout << "BitcoinFlame '" << BITCOINFLAME_RELEASE_NAME << "' (v" << BITCOINFLAME_VERSION_FULL << ")" << ENDL << ENDL;
     std::cout << desc_options << std::endl;
     return 1;
   }
@@ -638,7 +638,7 @@ int main(int argc, char* argv[])
   m_config_folder = command_line::get_arg(vm, data_dir_arg);
   db_arg_str = command_line::get_arg(vm, arg_database);
 
-  mlog_configure(mlog_get_default_log_path("electroneum-blockchain-import.log"), true);
+  mlog_configure(mlog_get_default_log_path("BitcoinFlame-blockchain-import.log"), true);
   if (!vm["log-level"].defaulted())
     mlog_set_log(command_line::get_arg(vm, arg_log_level).c_str());
   else

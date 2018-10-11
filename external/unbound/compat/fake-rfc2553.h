@@ -164,11 +164,11 @@ char *gai_strerror(int);
 void freeaddrinfo(struct addrinfo *);
 #endif /* !HAVE_FREEADDRINFO */
 
-#ifndef HAVE_GETNAMEINFO
+#ifndef HAVE_GBTCFAMEINFO
 #define getnameinfo(a,b,c,d,e,f,g) (getnameinfo_unbound(a,b,c,d,e,f,g))
 int getnameinfo(const struct sockaddr *, size_t, char *, size_t, 
     char *, size_t, int);
-#endif /* !HAVE_GETNAMEINFO */
+#endif /* !HAVE_GBTCFAMEINFO */
 
 #endif /* !_FAKE_RFC2553_H */
 

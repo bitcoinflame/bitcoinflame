@@ -1,4 +1,4 @@
-// Copyrights(c) 2017-2018, The Electroneum Project
+// Copyrights(c) 2017-2018, The BitcoinFlame Project
 // Copyrights(c) 2014-2017, The Monero Project
 //
 // All rights reserved.
@@ -61,8 +61,8 @@
   #include "upnperrors.h"
 #endif
 
-#undef ELECTRONEUM_DEFAULT_LOG_CATEGORY
-#define ELECTRONEUM_DEFAULT_LOG_CATEGORY "net.p2p"
+#undef BITCOINFLAME_DEFAULT_LOG_CATEGORY
+#define BITCOINFLAME_DEFAULT_LOG_CATEGORY "net.p2p"
 
 #define NET_MAKE_IP(b1,b2,b3,b4)  ((LPARAM)(((DWORD)(b1)<<24)+((DWORD)(b2)<<16)+((DWORD)(b3)<<8)+((DWORD)(b4))))
 
@@ -103,7 +103,7 @@ namespace nodetool
     const command_line::arg_descriptor<int64_t> arg_limit_rate_down = {"limit-rate-down", "set limit-rate-down [kB/s]", -1};
     const command_line::arg_descriptor<int64_t> arg_limit_rate = {"limit-rate", "set limit-rate [kB/s]", -1};
 
-    const command_line::arg_descriptor<bool> arg_save_graph = {"save-graph", "Save data for dr electroneum", false};
+    const command_line::arg_descriptor<bool> arg_save_graph = {"save-graph", "Save data for dr BitcoinFlame", false};
   }
   //-----------------------------------------------------------------------------------
   template<class t_payload_net_handler>
@@ -416,16 +416,11 @@ namespace nodetool
     }
     else
     {
-      full_addrs.insert("13.125.37.208:26967");
-      full_addrs.insert("13.125.50.165:26967");
-      full_addrs.insert("13.124.43.88:26967");
-      full_addrs.insert("34.250.126.109:26967");
-      full_addrs.insert("52.50.2.110:26967");
-      full_addrs.insert("34.240.247.44:26967");
-      full_addrs.insert("34.237.39.232:26967");
-      full_addrs.insert("34.236.180.233:26967");
-      full_addrs.insert("34.197.74.127:26967");
-    }
+      full_addrs.insert("seed1.BitcoinFlame.xyz:8820");
+      full_addrs.insert("seed2.BitcoinFlame.xyz:8820");
+      full_addrs.insert("seed3.BitcoinFlame.xyz:8820");
+      full_addrs.insert("seed4.BitcoinFlame.xyz:8820");
+      full_addrs.insert("seed5.BitcoinFlame.xyz:8820");    }
     return full_addrs;
   }
 
@@ -1441,7 +1436,7 @@ namespace nodetool
     }
     rsp.connections_count = m_net_server.get_config_object().get_connections_count();
     rsp.incoming_connections_count = rsp.connections_count - get_outgoing_connections_count();
-    rsp.version = ELECTRONEUM_VERSION_FULL;
+    rsp.version = BITCOINFLAME_VERSION_FULL;
     rsp.os_version = tools::get_os_version_string();
     m_payload_handler.get_stat_info(rsp.payload_info);
     return 1;

@@ -1,8 +1,8 @@
 /// @file
-/// @author rfree (current maintainer/user in electroneum.cc project - most of code is from CryptoNote)
+/// @author rfree (current maintainer/user in BitcoinFlame.cc project - most of code is from CryptoNote)
 /// @brief This is the orginal cryptonote protocol network-events handler, modified by us
 
-// Copyrights(c) 2017-2018, The Electroneum Project
+// Copyrights(c) 2017-2018, The BitcoinFlame Project
 // Copyrights(c) 2014-2017, The Monero Project
 // 
 // All rights reserved.

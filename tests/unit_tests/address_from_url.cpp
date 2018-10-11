@@ -1,4 +1,4 @@
-// Copyrights(c) 2017-2018, The Electroneum Project
+// Copyrights(c) 2017-2018, The BitcoinFlame Project
 // Copyrights(c) 2014-2017, The Monero Project
 // 
 // All rights reserved.
@@ -37,7 +37,7 @@
 
 TEST(AddressFromTXT, Success)
 {
-  std::string addr = "etnjwQwwEY65dhSMfKto64GgY7j7q2RUSZP1r8rXZ615J4egUC596R4crvZ5woWWTWBUztnKMUudzQ22E37LHiV48XWeJDFkkY";
+  std::string addr = "44LScvdQydZ4HGYSZ1tmByeqUVXcdhj2Yc9DE6ymtt9gcgtmJ9heTRbcSANUGXNmYUJMUBNwXgQQeeFPhzLH5eGPKcF2Ybm";
 
   std::string txtr = "oa1:etn";
   txtr += " recipient_address=";
@@ -58,7 +58,7 @@ TEST(AddressFromTXT, Success)
 
   EXPECT_STREQ(addr.c_str(), res.c_str());
 
-  std::string txtr3 = "foobar oa1:etn tx_description=\"Donation for Electroneum Development Fund\"; ";
+  std::string txtr3 = "foobar oa1:etn tx_description=\"Donation for BitcoinFlame Development Fund\"; ";
   txtr3 += "recipient_address=";
   txtr3 += addr;
   txtr3 += "; foobar";
@@ -84,11 +84,11 @@ TEST(AddressFromTXT, Failure)
 
 TEST(AddressFromURL, Success)
 {
-  const std::string addr = "etnjwQwwEY65dhSMfKto64GgY7j7q2RUSZP1r8rXZ615J4egUC596R4crvZ5woWWTWBUztnKMUudzQ22E37LHiV48XWeJDFkkY";
+  const std::string addr = "44LScvdQydZ4HGYSZ1tmByeqUVXcdhj2Yc9DE6ymtt9gcgtmJ9heTRbcSANUGXNmYUJMUBNwXgQQeeFPhzLH5eGPKcF2Ybm";
   
   bool dnssec_result = false;
 
-  std::vector<std::string> addresses = tools::dns_utils::addresses_from_url("donate.electroneum.com", dnssec_result);
+  std::vector<std::string> addresses = tools::dns_utils::addresses_from_url("donate.BitcoinFlame.com", dnssec_result);
 
   EXPECT_EQ(1, addresses.size());
   if (addresses.size() == 1)
@@ -97,7 +97,7 @@ TEST(AddressFromURL, Success)
   }
 
   // OpenAlias address with an @ instead of first .
-  addresses = tools::dns_utils::addresses_from_url("donate@electroneum.com", dnssec_result);
+  addresses = tools::dns_utils::addresses_from_url("donate@BitcoinFlame.com", dnssec_result);
   EXPECT_EQ(1, addresses.size());
   if (addresses.size() == 1)
   {

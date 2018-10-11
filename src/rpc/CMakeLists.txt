@@ -1,4 +1,4 @@
-# Copyright (c) 2017-2018, The Electroneum Project
+# Copyright (c) 2017-2018, The BitcoinFlame Project
 # Copyright (c) 2014-2017, The Monero Project
 #
 # All rights reserved.
@@ -39,9 +39,9 @@ set(rpc_private_headers
   core_rpc_server_commands_defs.h
   core_rpc_server_error_codes.h)
 
-electroneum_private_headers(rpc
+BitcoinFlame_private_headers(rpc
   ${rpc_private_headers})
-electroneum_add_library(rpc
+BitcoinFlame_add_library(rpc
   ${rpc_sources}
   ${rpc_headers}
   ${rpc_private_headers})

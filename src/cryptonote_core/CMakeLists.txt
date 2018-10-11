@@ -1,4 +1,4 @@
-# Copyright (c) 2017-2018, The Electroneum Project
+# Copyright (c) 2017-2018, The BitcoinFlame Project
 # Copyright (c) 2014-2017, The Monero Project
 #
 # All rights reserved.
@@ -48,9 +48,9 @@ else()
   set(Blocks "")
 endif()
 
-electroneum_private_headers(cryptonote_core
+BitcoinFlame_private_headers(cryptonote_core
   ${crypto_private_headers})
-electroneum_add_library(cryptonote_core
+BitcoinFlame_add_library(cryptonote_core
   ${cryptonote_core_sources}
   ${cryptonote_core_headers}
   ${cryptonote_core_private_headers})

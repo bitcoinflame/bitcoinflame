@@ -1,4 +1,4 @@
-# Copyright (c) 2017-2018, The Electroneum Project
+# Copyright (c) 2017-2018, The BitcoinFlame Project
 # Copyright (c) 2014-2017, The Monero Project
 #
 # All rights reserved.
@@ -55,9 +55,9 @@ else()
   )
 endif()
 
-electroneum_private_headers(daemonizer
+BitcoinFlame_private_headers(daemonizer
   ${daemonizer_private_headers})
-electroneum_add_library(daemonizer
+BitcoinFlame_add_library(daemonizer
   ${daemonizer_sources}
   ${daemonizer_headers}
   ${daemonizer_private_headers})

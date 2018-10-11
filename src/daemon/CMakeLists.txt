@@ -1,4 +1,4 @@
-# Copyright (c) 2017-2018, The Electroneum Project
+# Copyright (c) 2017-2018, The BitcoinFlame Project
 # Copyright (c) 2014-2017, The Monero Project
 #
 # All rights reserved.
@@ -75,9 +75,9 @@ set(daemon_private_headers
   ../p2p/p2p_protocol_defs.h
   ../p2p/stdafx.h)
 
-electroneum_private_headers(daemon
+BitcoinFlame_private_headers(daemon
   ${daemon_private_headers})
-electroneum_add_executable(daemon
+BitcoinFlame_add_executable(daemon
   ${daemon_sources}
   ${daemon_headers}
   ${daemon_private_headers}
@@ -103,5 +103,5 @@ target_link_libraries(daemon
 add_dependencies(daemon version)
 set_property(TARGET daemon
   PROPERTY
-    OUTPUT_NAME "electroneumd")
+    OUTPUT_NAME "BitcoinFlamed")
 install(TARGETS daemon DESTINATION bin)

@@ -31,12 +31,12 @@
 #include <atomic>
 #include "misc_log_ex.h"
 
-#undef ELECTRONEUM_DEFAULT_LOG_CATEGORY
-#define ELECTRONEUM_DEFAULT_LOG_CATEGORY "logging"
+#undef BITCOINFLAME_DEFAULT_LOG_CATEGORY
+#define BITCOINFLAME_DEFAULT_LOG_CATEGORY "logging"
 
 #define MLOG_BASE_FORMAT "%datetime{%Y-%M-%d %H:%m:%s.%g}\t%thread\t%level\t%logger\t%loc\t%msg"
 
-#define MLOG_LOG(x) CINFO(el::base::Writer,el::base::DispatchAction::FileOnlyLog,ELECTRONEUM_DEFAULT_LOG_CATEGORY) << x
+#define MLOG_LOG(x) CINFO(el::base::Writer,el::base::DispatchAction::FileOnlyLog,BITCOINFLAME_DEFAULT_LOG_CATEGORY) << x
 
 using namespace epee;
 
@@ -116,7 +116,7 @@ void mlog_configure(const std::string &filename_base, bool console)
   el::Configurations c;
   c.setGlobally(el::ConfigurationType::Filename, filename_base);
   c.setGlobally(el::ConfigurationType::ToFile, "true");
-  const char *log_format = getenv("ELECTRONEUM_LOG_FORMAT");
+  const char *log_format = getenv("BITCOINFLAME_LOG_FORMAT");
   if (!log_format)
     log_format = MLOG_BASE_FORMAT;
   c.setGlobally(el::ConfigurationType::Format, log_format);
@@ -134,12 +134,12 @@ void mlog_configure(const std::string &filename_base, bool console)
     rename(name, rname.c_str());
   });
   mlog_set_common_prefix();
-  const char *electroneum_log = getenv("ELECTRONEUM_LOGS");
-  if (!electroneum_log)
+  const char *BitcoinFlame_log = getenv("BITCOINFLAME_LOGS");
+  if (!BitcoinFlame_log)
   {
-    electroneum_log = get_default_categories(0);
+    BitcoinFlame_log = get_default_categories(0);
   }
-  mlog_set_log(electroneum_log);
+  mlog_set_log(BitcoinFlame_log);
 }
 
 void mlog_set_categories(const char *categories)

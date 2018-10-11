@@ -1,4 +1,4 @@
-# Copyright (c) 2017-2018, The Electroneum Project
+# Copyright (c) 2017-2018, The BitcoinFlame Project
 # Copyright (c) 2014-2017, The Monero Project
 #
 # All rights reserved.
@@ -54,9 +54,9 @@ if (BERKELEY_DB)
   )
 endif()
 
-electroneum_private_headers(blockchain_db
+BitcoinFlame_private_headers(blockchain_db
   ${crypto_private_headers})
-electroneum_add_library(blockchain_db
+BitcoinFlame_add_library(blockchain_db
   ${blockchain_db_sources}
   ${blockchain_db_headers}
   ${blockchain_db_private_headers})

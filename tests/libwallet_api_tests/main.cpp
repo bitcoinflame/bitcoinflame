@@ -1,4 +1,4 @@
-// Copyrights(c) 2017-2018, The Electroneum Project
+// Copyrights(c) 2017-2018, The BitcoinFlame Project
 // Copyrights(c) 2014-2017, The Monero Project
 // 
 // All rights reserved.
@@ -68,7 +68,7 @@ const char * WALLET_PASS = "password";
 const char * WALLET_PASS2 = "password22";
 const char * WALLET_LANG = "English";
 
-std::string WALLETS_ROOT_DIR = "/var/electroneum/testnet_pvt";
+std::string WALLETS_ROOT_DIR = "/var/BitcoinFlame/testnet_pvt";
 std::string TESTNET_WALLET1_NAME;
 std::string TESTNET_WALLET2_NAME;
 std::string TESTNET_WALLET3_NAME;
@@ -113,15 +113,15 @@ struct Utils
         boost::filesystem::remove_all(path);
     }
 
-    static void print_transaction(Electroneum::TransactionInfo * t)
+    static void print_transaction(BitcoinFlame::TransactionInfo * t)
     {
 
         std::cout << "d: "
-                  << (t->direction() == Electroneum::TransactionInfo::Direction_In ? "in" : "out")
+                  << (t->direction() == BitcoinFlame::TransactionInfo::Direction_In ? "in" : "out")
                   << ", pe: " << (t->isPending() ? "true" : "false")
                   << ", bh: " << t->blockHeight()
-                  << ", a: " << Electroneum::Wallet::displayAmount(t->amount())
-                  << ", f: " << Electroneum::Wallet::displayAmount(t->fee())
+                  << ", a: " << BitcoinFlame::Wallet::displayAmount(t->amount())
+                  << ", f: " << BitcoinFlame::Wallet::displayAmount(t->fee())
                   << ", h: " << t->hash()
                   << ", pid: " << t->paymentId()
                   << std::endl;
@@ -129,8 +129,8 @@ struct Utils
 
     static std::string get_wallet_address(const std::string &filename, const std::string &password)
     {
-        Electroneum::WalletManager *wmgr = Electroneum::WalletManagerFactory::getWalletManager();
-        Electroneum::Wallet * w = wmgr->openWallet(filename, password, true);
+        BitcoinFlame::WalletManager *wmgr = BitcoinFlame::WalletManagerFactory::getWalletManager();
+        BitcoinFlame::Wallet * w = wmgr->openWallet(filename, password, true);
         std::string result = w->address();
         wmgr->closeWallet(w);
         return result;
@@ -140,14 +140,14 @@ struct Utils
 
 struct WalletManagerTest : public testing::Test
 {
-    Electroneum::WalletManager * wmgr;
+    BitcoinFlame::WalletManager * wmgr;
 
 
     WalletManagerTest()
     {
         std::cout << __FUNCTION__ << std::endl;
-        wmgr = Electroneum::WalletManagerFactory::getWalletManager();
-        // Electroneum::WalletManagerFactory::setLogLevel(Electroneum::WalletManagerFactory::LogLevel_4);
+        wmgr = BitcoinFlame::WalletManagerFactory::getWalletManager();
+        // BitcoinFlame::WalletManagerFactory::setLogLevel(BitcoinFlame::WalletManagerFactory::LogLevel_4);
         Utils::deleteWallet(WALLET_NAME);
         Utils::deleteDir(boost::filesystem::path(WALLET_NAME_WITH_DIR).parent_path().string());
     }
@@ -163,13 +163,13 @@ struct WalletManagerTest : public testing::Test
 
 struct WalletManagerMainnetTest : public testing::Test
 {
-    Electroneum::WalletManager * wmgr;
+    BitcoinFlame::WalletManager * wmgr;
 
 
     WalletManagerMainnetTest()
     {
         std::cout << __FUNCTION__ << std::endl;
-        wmgr = Electroneum::WalletManagerFactory::getWalletManager();
+        wmgr = BitcoinFlame::WalletManagerFactory::getWalletManager();
         Utils::deleteWallet(WALLET_NAME_MAINNET);
     }
 
@@ -183,11 +183,11 @@ struct WalletManagerMainnetTest : public testing::Test
 
 struct WalletTest1 : public testing::Test
 {
-    Electroneum::WalletManager * wmgr;
+    BitcoinFlame::WalletManager * wmgr;
 
     WalletTest1()
     {
-        wmgr = Electroneum::WalletManagerFactory::getWalletManager();
+        wmgr = BitcoinFlame::WalletManagerFactory::getWalletManager();
     }
 
 
@@ -196,11 +196,11 @@ struct WalletTest1 : public testing::Test
 
 struct WalletTest2 : public testing::Test
 {
-    Electroneum::WalletManager * wmgr;
+    BitcoinFlame::WalletManager * wmgr;
 
     WalletTest2()
     {
-        wmgr = Electroneum::WalletManagerFactory::getWalletManager();
+        wmgr = BitcoinFlame::WalletManagerFactory::getWalletManager();
     }
 
 };
@@ -208,8 +208,8 @@ struct WalletTest2 : public testing::Test
 TEST_F(WalletManagerTest, WalletManagerCreatesWallet)
 {
 
-    Electroneum::Wallet * wallet = wmgr->createWallet(WALLET_NAME, WALLET_PASS, WALLET_LANG);
-    ASSERT_TRUE(wallet->status() == Electroneum::Wallet::Status_Ok);
+    BitcoinFlame::Wallet * wallet = wmgr->createWallet(WALLET_NAME, WALLET_PASS, WALLET_LANG);
+    ASSERT_TRUE(wallet->status() == BitcoinFlame::Wallet::Status_Ok);
     ASSERT_TRUE(!wallet->seed().empty());
     std::vector<std::string> words;
     std::string seed = wallet->seed();
@@ -225,11 +225,11 @@ TEST_F(WalletManagerTest, WalletManagerCreatesWallet)
 TEST_F(WalletManagerTest, WalletManagerOpensWallet)
 {
 
-    Electroneum::Wallet * wallet1 = wmgr->createWallet(WALLET_NAME, WALLET_PASS, WALLET_LANG);
+    BitcoinFlame::Wallet * wallet1 = wmgr->createWallet(WALLET_NAME, WALLET_PASS, WALLET_LANG);
     std::string seed1 = wallet1->seed();
     ASSERT_TRUE(wmgr->closeWallet(wallet1));
-    Electroneum::Wallet * wallet2 = wmgr->openWallet(WALLET_NAME, WALLET_PASS);
-    ASSERT_TRUE(wallet2->status() == Electroneum::Wallet::Status_Ok);
+    BitcoinFlame::Wallet * wallet2 = wmgr->openWallet(WALLET_NAME, WALLET_PASS);
+    ASSERT_TRUE(wallet2->status() == BitcoinFlame::Wallet::Status_Ok);
     ASSERT_TRUE(wallet2->seed() == seed1);
     std::cout << "** seed: " << wallet2->seed() << std::endl;
 }
@@ -237,26 +237,26 @@ TEST_F(WalletManagerTest, WalletManagerOpensWallet)
 
 TEST_F(WalletManagerTest, WalletMaxAmountAsString)
 {
-    LOG_PRINT_L3("max amount: " << Electroneum::Wallet::displayAmount(
-                     Electroneum::Wallet::maximumAllowedAmount()));
+    LOG_PRINT_L3("max amount: " << BitcoinFlame::Wallet::displayAmount(
+                     BitcoinFlame::Wallet::maximumAllowedAmount()));
 
 }
 
 
 TEST_F(WalletManagerTest, WalletAmountFromString)
 {
-    uint64_t amount = Electroneum::Wallet::amountFromString("18446740");
+    uint64_t amount = BitcoinFlame::Wallet::amountFromString("18446740");
     ASSERT_TRUE(amount > 0);
-    amount = Electroneum::Wallet::amountFromString("11000000000000");
+    amount = BitcoinFlame::Wallet::amountFromString("11000000000000");
     ASSERT_FALSE(amount > 0);
-    amount = Electroneum::Wallet::amountFromString("0.0");
+    amount = BitcoinFlame::Wallet::amountFromString("0.0");
     ASSERT_FALSE(amount > 0);
-    amount = Electroneum::Wallet::amountFromString("10.1");
+    amount = BitcoinFlame::Wallet::amountFromString("10.1");
     ASSERT_TRUE(amount > 0);
 
 }
 
-void open_wallet_helper(Electroneum::WalletManager *wmgr, Electroneum::Wallet **wallet, const std::string &pass, boost::mutex *mutex)
+void open_wallet_helper(BitcoinFlame::WalletManager *wmgr, BitcoinFlame::Wallet **wallet, const std::string &pass, boost::mutex *mutex)
 {
     if (mutex)
         mutex->lock();
@@ -277,23 +277,23 @@ void open_wallet_helper(Electroneum::WalletManager *wmgr, Electroneum::Wallet **
 //    // create password protected wallet
 //    std::string wallet_pass = "password";
 //    std::string wrong_wallet_pass = "1111";
-//    Electroneum::Wallet * wallet1 = wmgr->createWallet(WALLET_NAME, wallet_pass, WALLET_LANG, true);
+//    BitcoinFlame::Wallet * wallet1 = wmgr->createWallet(WALLET_NAME, wallet_pass, WALLET_LANG, true);
 //    std::string seed1 = wallet1->seed();
 //    ASSERT_TRUE(wmgr->closeWallet(wallet1));
 
-//    Electroneum::Wallet *wallet2 = nullptr;
-//    Electroneum::Wallet *wallet3 = nullptr;
+//    BitcoinFlame::Wallet *wallet2 = nullptr;
+//    BitcoinFlame::Wallet *wallet3 = nullptr;
 
 //    std::mutex mutex;
 //    std::thread thread1(open_wallet, wmgr, &wallet2, wrong_wallet_pass, &mutex);
 //    thread1.join();
-//    ASSERT_TRUE(wallet2->status() != Electroneum::Wallet::Status_Ok);
+//    ASSERT_TRUE(wallet2->status() != BitcoinFlame::Wallet::Status_Ok);
 //    ASSERT_TRUE(wmgr->closeWallet(wallet2));
 
 //    std::thread thread2(open_wallet, wmgr, &wallet3, wallet_pass, &mutex);
 //    thread2.join();
 
-//    ASSERT_TRUE(wallet3->status() == Electroneum::Wallet::Status_Ok);
+//    ASSERT_TRUE(wallet3->status() == BitcoinFlame::Wallet::Status_Ok);
 //    ASSERT_TRUE(wmgr->closeWallet(wallet3));
 //}
 
@@ -303,22 +303,22 @@ TEST_F(WalletManagerTest, WalletManagerOpensWalletWithPasswordAndReopen)
     // create password protected wallet
     std::string wallet_pass = "password";
     std::string wrong_wallet_pass = "1111";
-    Electroneum::Wallet * wallet1 = wmgr->createWallet(WALLET_NAME, wallet_pass, WALLET_LANG, true);
+    BitcoinFlame::Wallet * wallet1 = wmgr->createWallet(WALLET_NAME, wallet_pass, WALLET_LANG, true);
     std::string seed1 = wallet1->seed();
     ASSERT_TRUE(wmgr->closeWallet(wallet1));
 
-    Electroneum::Wallet *wallet2 = nullptr;
-    Electroneum::Wallet *wallet3 = nullptr;
+    BitcoinFlame::Wallet *wallet2 = nullptr;
+    BitcoinFlame::Wallet *wallet3 = nullptr;
     boost::mutex mutex;
 
     open_wallet_helper(wmgr, &wallet2, wrong_wallet_pass, nullptr);
     ASSERT_TRUE(wallet2 != nullptr);
-    ASSERT_TRUE(wallet2->status() != Electroneum::Wallet::Status_Ok);
+    ASSERT_TRUE(wallet2->status() != BitcoinFlame::Wallet::Status_Ok);
     ASSERT_TRUE(wmgr->closeWallet(wallet2));
 
     open_wallet_helper(wmgr, &wallet3, wallet_pass, nullptr);
     ASSERT_TRUE(wallet3 != nullptr);
-    ASSERT_TRUE(wallet3->status() == Electroneum::Wallet::Status_Ok);
+    ASSERT_TRUE(wallet3->status() == BitcoinFlame::Wallet::Status_Ok);
     ASSERT_TRUE(wmgr->closeWallet(wallet3));
 }
 
@@ -326,12 +326,12 @@ TEST_F(WalletManagerTest, WalletManagerOpensWalletWithPasswordAndReopen)
 TEST_F(WalletManagerTest, WalletManagerStoresWallet)
 {
 
-    Electroneum::Wallet * wallet1 = wmgr->createWallet(WALLET_NAME, WALLET_PASS, WALLET_LANG);
+    BitcoinFlame::Wallet * wallet1 = wmgr->createWallet(WALLET_NAME, WALLET_PASS, WALLET_LANG);
     std::string seed1 = wallet1->seed();
     wallet1->store("");
     ASSERT_TRUE(wmgr->closeWallet(wallet1));
-    Electroneum::Wallet * wallet2 = wmgr->openWallet(WALLET_NAME, WALLET_PASS);
-    ASSERT_TRUE(wallet2->status() == Electroneum::Wallet::Status_Ok);
+    BitcoinFlame::Wallet * wallet2 = wmgr->openWallet(WALLET_NAME, WALLET_PASS);
+    ASSERT_TRUE(wallet2->status() == BitcoinFlame::Wallet::Status_Ok);
     ASSERT_TRUE(wallet2->seed() == seed1);
 }
 
@@ -339,45 +339,45 @@ TEST_F(WalletManagerTest, WalletManagerStoresWallet)
 TEST_F(WalletManagerTest, WalletManagerMovesWallet)
 {
 
-    Electroneum::Wallet * wallet1 = wmgr->createWallet(WALLET_NAME, WALLET_PASS, WALLET_LANG);
+    BitcoinFlame::Wallet * wallet1 = wmgr->createWallet(WALLET_NAME, WALLET_PASS, WALLET_LANG);
     std::string WALLET_NAME_MOVED = std::string("/tmp/") + WALLET_NAME + ".moved";
     std::string seed1 = wallet1->seed();
     ASSERT_TRUE(wallet1->store(WALLET_NAME_MOVED));
 
-    Electroneum::Wallet * wallet2 = wmgr->openWallet(WALLET_NAME_MOVED, WALLET_PASS);
+    BitcoinFlame::Wallet * wallet2 = wmgr->openWallet(WALLET_NAME_MOVED, WALLET_PASS);
     ASSERT_TRUE(wallet2->filename() == WALLET_NAME_MOVED);
     ASSERT_TRUE(wallet2->keysFilename() == WALLET_NAME_MOVED + ".keys");
-    ASSERT_TRUE(wallet2->status() == Electroneum::Wallet::Status_Ok);
+    ASSERT_TRUE(wallet2->status() == BitcoinFlame::Wallet::Status_Ok);
     ASSERT_TRUE(wallet2->seed() == seed1);
 }
 
 
 TEST_F(WalletManagerTest, WalletManagerChangesPassword)
 {
-    Electroneum::Wallet * wallet1 = wmgr->createWallet(WALLET_NAME, WALLET_PASS, WALLET_LANG);
+    BitcoinFlame::Wallet * wallet1 = wmgr->createWallet(WALLET_NAME, WALLET_PASS, WALLET_LANG);
     std::string seed1 = wallet1->seed();
     ASSERT_TRUE(wallet1->setPassword(WALLET_PASS2));
     ASSERT_TRUE(wmgr->closeWallet(wallet1));
-    Electroneum::Wallet * wallet2 = wmgr->openWallet(WALLET_NAME, WALLET_PASS2);
-    ASSERT_TRUE(wallet2->status() == Electroneum::Wallet::Status_Ok);
+    BitcoinFlame::Wallet * wallet2 = wmgr->openWallet(WALLET_NAME, WALLET_PASS2);
+    ASSERT_TRUE(wallet2->status() == BitcoinFlame::Wallet::Status_Ok);
     ASSERT_TRUE(wallet2->seed() == seed1);
     ASSERT_TRUE(wmgr->closeWallet(wallet2));
-    Electroneum::Wallet * wallet3 = wmgr->openWallet(WALLET_NAME, WALLET_PASS);
-    ASSERT_FALSE(wallet3->status() == Electroneum::Wallet::Status_Ok);
+    BitcoinFlame::Wallet * wallet3 = wmgr->openWallet(WALLET_NAME, WALLET_PASS);
+    ASSERT_FALSE(wallet3->status() == BitcoinFlame::Wallet::Status_Ok);
 }
 
 
 
 TEST_F(WalletManagerTest, WalletManagerRecoversWallet)
 {
-    Electroneum::Wallet * wallet1 = wmgr->createWallet(WALLET_NAME, WALLET_PASS, WALLET_LANG);
+    BitcoinFlame::Wallet * wallet1 = wmgr->createWallet(WALLET_NAME, WALLET_PASS, WALLET_LANG);
     std::string seed1 = wallet1->seed();
     std::string address1 = wallet1->address();
     ASSERT_FALSE(address1.empty());
     ASSERT_TRUE(wmgr->closeWallet(wallet1));
     Utils::deleteWallet(WALLET_NAME);
-    Electroneum::Wallet * wallet2 = wmgr->recoveryWallet(WALLET_NAME, seed1);
-    ASSERT_TRUE(wallet2->status() == Electroneum::Wallet::Status_Ok);
+    BitcoinFlame::Wallet * wallet2 = wmgr->recoveryWallet(WALLET_NAME, seed1);
+    ASSERT_TRUE(wallet2->status() == BitcoinFlame::Wallet::Status_Ok);
     ASSERT_TRUE(wallet2->seed() == seed1);
     ASSERT_TRUE(wallet2->address() == address1);
     ASSERT_TRUE(wmgr->closeWallet(wallet2));
@@ -386,15 +386,15 @@ TEST_F(WalletManagerTest, WalletManagerRecoversWallet)
 
 TEST_F(WalletManagerTest, WalletManagerStoresWallet1)
 {
-    Electroneum::Wallet * wallet1 = wmgr->createWallet(WALLET_NAME, WALLET_PASS, WALLET_LANG);
+    BitcoinFlame::Wallet * wallet1 = wmgr->createWallet(WALLET_NAME, WALLET_PASS, WALLET_LANG);
     std::string seed1 = wallet1->seed();
     std::string address1 = wallet1->address();
 
     ASSERT_TRUE(wallet1->store(""));
     ASSERT_TRUE(wallet1->store(WALLET_NAME_COPY));
     ASSERT_TRUE(wmgr->closeWallet(wallet1));
-    Electroneum::Wallet * wallet2 = wmgr->openWallet(WALLET_NAME_COPY, WALLET_PASS);
-    ASSERT_TRUE(wallet2->status() == Electroneum::Wallet::Status_Ok);
+    BitcoinFlame::Wallet * wallet2 = wmgr->openWallet(WALLET_NAME_COPY, WALLET_PASS);
+    ASSERT_TRUE(wallet2->status() == BitcoinFlame::Wallet::Status_Ok);
     ASSERT_TRUE(wallet2->seed() == seed1);
     ASSERT_TRUE(wallet2->address() == address1);
     ASSERT_TRUE(wmgr->closeWallet(wallet2));
@@ -403,7 +403,7 @@ TEST_F(WalletManagerTest, WalletManagerStoresWallet1)
 
 TEST_F(WalletManagerTest, WalletManagerStoresWallet2)
 {
-    Electroneum::Wallet * wallet1 = wmgr->createWallet(WALLET_NAME, WALLET_PASS, WALLET_LANG);
+    BitcoinFlame::Wallet * wallet1 = wmgr->createWallet(WALLET_NAME, WALLET_PASS, WALLET_LANG);
     std::string seed1 = wallet1->seed();
     std::string address1 = wallet1->address();
 
@@ -411,7 +411,7 @@ TEST_F(WalletManagerTest, WalletManagerStoresWallet2)
     ASSERT_TRUE(wmgr->closeWallet(wallet1));
 
     wallet1 = wmgr->openWallet(WALLET_NAME_WITH_DIR, WALLET_PASS);
-    ASSERT_TRUE(wallet1->status() == Electroneum::Wallet::Status_Ok);
+    ASSERT_TRUE(wallet1->status() == BitcoinFlame::Wallet::Status_Ok);
     ASSERT_TRUE(wallet1->seed() == seed1);
     ASSERT_TRUE(wallet1->address() == address1);
     ASSERT_TRUE(wmgr->closeWallet(wallet1));
@@ -420,7 +420,7 @@ TEST_F(WalletManagerTest, WalletManagerStoresWallet2)
 
 TEST_F(WalletManagerTest, WalletManagerStoresWallet3)
 {
-    Electroneum::Wallet * wallet1 = wmgr->createWallet(WALLET_NAME, WALLET_PASS, WALLET_LANG);
+    BitcoinFlame::Wallet * wallet1 = wmgr->createWallet(WALLET_NAME, WALLET_PASS, WALLET_LANG);
     std::string seed1 = wallet1->seed();
     std::string address1 = wallet1->address();
 
@@ -428,13 +428,13 @@ TEST_F(WalletManagerTest, WalletManagerStoresWallet3)
     ASSERT_TRUE(wmgr->closeWallet(wallet1));
 
     wallet1 = wmgr->openWallet(WALLET_NAME_WITH_DIR_NON_WRITABLE, WALLET_PASS);
-    ASSERT_FALSE(wallet1->status() == Electroneum::Wallet::Status_Ok);
+    ASSERT_FALSE(wallet1->status() == BitcoinFlame::Wallet::Status_Ok);
 
     // "close" always returns true;
     ASSERT_TRUE(wmgr->closeWallet(wallet1));
 
     wallet1 = wmgr->openWallet(WALLET_NAME, WALLET_PASS);
-    ASSERT_TRUE(wallet1->status() == Electroneum::Wallet::Status_Ok);
+    ASSERT_TRUE(wallet1->status() == BitcoinFlame::Wallet::Status_Ok);
     ASSERT_TRUE(wallet1->seed() == seed1);
     ASSERT_TRUE(wallet1->address() == address1);
     ASSERT_TRUE(wmgr->closeWallet(wallet1));
@@ -444,20 +444,20 @@ TEST_F(WalletManagerTest, WalletManagerStoresWallet3)
 
 TEST_F(WalletManagerTest, WalletManagerStoresWallet4)
 {
-    Electroneum::Wallet * wallet1 = wmgr->createWallet(WALLET_NAME, WALLET_PASS, WALLET_LANG);
+    BitcoinFlame::Wallet * wallet1 = wmgr->createWallet(WALLET_NAME, WALLET_PASS, WALLET_LANG);
     std::string seed1 = wallet1->seed();
     std::string address1 = wallet1->address();
 
     ASSERT_TRUE(wallet1->store(""));
-    ASSERT_TRUE(wallet1->status() == Electroneum::Wallet::Status_Ok);
+    ASSERT_TRUE(wallet1->status() == BitcoinFlame::Wallet::Status_Ok);
 
     ASSERT_TRUE(wallet1->store(""));
-    ASSERT_TRUE(wallet1->status() == Electroneum::Wallet::Status_Ok);
+    ASSERT_TRUE(wallet1->status() == BitcoinFlame::Wallet::Status_Ok);
 
     ASSERT_TRUE(wmgr->closeWallet(wallet1));
 
     wallet1 = wmgr->openWallet(WALLET_NAME, WALLET_PASS);
-    ASSERT_TRUE(wallet1->status() == Electroneum::Wallet::Status_Ok);
+    ASSERT_TRUE(wallet1->status() == BitcoinFlame::Wallet::Status_Ok);
     ASSERT_TRUE(wallet1->seed() == seed1);
     ASSERT_TRUE(wallet1->address() == address1);
     ASSERT_TRUE(wmgr->closeWallet(wallet1));
@@ -479,16 +479,16 @@ TEST_F(WalletManagerTest, WalletManagerFindsWallet)
 
 TEST_F(WalletTest1, WalletGeneratesPaymentId)
 {
-    std::string payment_id = Electroneum::Wallet::genPaymentId();
+    std::string payment_id = BitcoinFlame::Wallet::genPaymentId();
     ASSERT_TRUE(payment_id.length() == 16);
 }
 
 
 TEST_F(WalletTest1, WalletGeneratesIntegratedAddress)
 {
-    std::string payment_id = Electroneum::Wallet::genPaymentId();
+    std::string payment_id = BitcoinFlame::Wallet::genPaymentId();
 
-    Electroneum::Wallet * wallet1 = wmgr->openWallet(CURRENT_SRC_WALLET, TESTNET_WALLET_PASS, true);
+    BitcoinFlame::Wallet * wallet1 = wmgr->openWallet(CURRENT_SRC_WALLET, TESTNET_WALLET_PASS, true);
     std::string integrated_address = wallet1->integratedAddress(payment_id);
     ASSERT_TRUE(integrated_address.length() == 106);
 }
@@ -496,14 +496,14 @@ TEST_F(WalletTest1, WalletGeneratesIntegratedAddress)
 
 TEST_F(WalletTest1, WalletShowsBalance)
 {
-    Electroneum::Wallet * wallet1 = wmgr->openWallet(CURRENT_SRC_WALLET, TESTNET_WALLET_PASS, true);
+    BitcoinFlame::Wallet * wallet1 = wmgr->openWallet(CURRENT_SRC_WALLET, TESTNET_WALLET_PASS, true);
     ASSERT_TRUE(wallet1->balance() > 0);
     ASSERT_TRUE(wallet1->unlockedBalance() > 0);
 
     uint64_t balance1 = wallet1->balance();
     uint64_t unlockedBalance1 = wallet1->unlockedBalance();
     ASSERT_TRUE(wmgr->closeWallet(wallet1));
-    Electroneum::Wallet * wallet2 = wmgr->openWallet(CURRENT_SRC_WALLET, TESTNET_WALLET_PASS, true);
+    BitcoinFlame::Wallet * wallet2 = wmgr->openWallet(CURRENT_SRC_WALLET, TESTNET_WALLET_PASS, true);
 
     ASSERT_TRUE(balance1 == wallet2->balance());
     std::cout << "wallet balance: " << wallet2->balance() << std::endl;
@@ -514,7 +514,7 @@ TEST_F(WalletTest1, WalletShowsBalance)
 
 TEST_F(WalletTest1, WalletReturnsCurrentBlockHeight)
 {
-    Electroneum::Wallet * wallet1 = wmgr->openWallet(CURRENT_SRC_WALLET, TESTNET_WALLET_PASS, true);
+    BitcoinFlame::Wallet * wallet1 = wmgr->openWallet(CURRENT_SRC_WALLET, TESTNET_WALLET_PASS, true);
     ASSERT_TRUE(wallet1->blockChainHeight() > 0);
     wmgr->closeWallet(wallet1);
 }
@@ -522,10 +522,10 @@ TEST_F(WalletTest1, WalletReturnsCurrentBlockHeight)
 
 TEST_F(WalletTest1, WalletReturnsDaemonBlockHeight)
 {
-    Electroneum::Wallet * wallet1 = wmgr->openWallet(CURRENT_SRC_WALLET, TESTNET_WALLET_PASS, true);
+    BitcoinFlame::Wallet * wallet1 = wmgr->openWallet(CURRENT_SRC_WALLET, TESTNET_WALLET_PASS, true);
     // wallet not connected to daemon
     ASSERT_TRUE(wallet1->daemonBlockChainHeight() == 0);
-    ASSERT_TRUE(wallet1->status() != Electroneum::Wallet::Status_Ok);
+    ASSERT_TRUE(wallet1->status() != BitcoinFlame::Wallet::Status_Ok);
     ASSERT_FALSE(wallet1->errorString().empty());
     wmgr->closeWallet(wallet1);
 
@@ -542,7 +542,7 @@ TEST_F(WalletTest1, WalletRefresh)
 {
 
     std::cout << "Opening wallet: " << CURRENT_SRC_WALLET << std::endl;
-    Electroneum::Wallet * wallet1 = wmgr->openWallet(CURRENT_SRC_WALLET, TESTNET_WALLET_PASS, true);
+    BitcoinFlame::Wallet * wallet1 = wmgr->openWallet(CURRENT_SRC_WALLET, TESTNET_WALLET_PASS, true);
     // make sure testnet daemon is running
     std::cout << "connecting to daemon: " << TESTNET_DAEMON_ADDRESS << std::endl;
     ASSERT_TRUE(wallet1->init(TESTNET_DAEMON_ADDRESS, 0));
@@ -552,12 +552,12 @@ TEST_F(WalletTest1, WalletRefresh)
 
 TEST_F(WalletTest1, WalletConvertsToString)
 {
-    std::string strAmount = Electroneum::Wallet::displayAmount(AMOUNT_5XMR);
-    ASSERT_TRUE(AMOUNT_5XMR == Electroneum::Wallet::amountFromString(strAmount));
+    std::string strAmount = BitcoinFlame::Wallet::displayAmount(AMOUNT_5XMR);
+    ASSERT_TRUE(AMOUNT_5XMR == BitcoinFlame::Wallet::amountFromString(strAmount));
 
-    ASSERT_TRUE(AMOUNT_5XMR == Electroneum::Wallet::amountFromDouble(5.0));
-    ASSERT_TRUE(AMOUNT_10XMR == Electroneum::Wallet::amountFromDouble(10.0));
-    ASSERT_TRUE(AMOUNT_1XMR == Electroneum::Wallet::amountFromDouble(1.0));
+    ASSERT_TRUE(AMOUNT_5XMR == BitcoinFlame::Wallet::amountFromDouble(5.0));
+    ASSERT_TRUE(AMOUNT_10XMR == BitcoinFlame::Wallet::amountFromDouble(10.0));
+    ASSERT_TRUE(AMOUNT_1XMR == BitcoinFlame::Wallet::amountFromDouble(1.0));
 
 }
 
@@ -566,23 +566,23 @@ TEST_F(WalletTest1, WalletConvertsToString)
 TEST_F(WalletTest1, WalletTransaction)
 
 {
-    Electroneum::Wallet * wallet1 = wmgr->openWallet(CURRENT_SRC_WALLET, TESTNET_WALLET_PASS, true);
+    BitcoinFlame::Wallet * wallet1 = wmgr->openWallet(CURRENT_SRC_WALLET, TESTNET_WALLET_PASS, true);
     // make sure testnet daemon is running
     ASSERT_TRUE(wallet1->init(TESTNET_DAEMON_ADDRESS, 0));
     ASSERT_TRUE(wallet1->refresh());
     uint64_t balance = wallet1->balance();
-    ASSERT_TRUE(wallet1->status() == Electroneum::PendingTransaction::Status_Ok);
+    ASSERT_TRUE(wallet1->status() == BitcoinFlame::PendingTransaction::Status_Ok);
 
     std::string recepient_address = Utils::get_wallet_address(CURRENT_DST_WALLET, TESTNET_WALLET_PASS);
     const int MIXIN_COUNT = 4;
 
 
-    Electroneum::PendingTransaction * transaction = wallet1->createTransaction(recepient_address,
+    BitcoinFlame::PendingTransaction * transaction = wallet1->createTransaction(recepient_address,
                                                                              PAYMENT_ID_EMPTY,
                                                                              AMOUNT_10XMR,
                                                                              MIXIN_COUNT,
-                                                                             Electroneum::PendingTransaction::Priority_Medium);
-    ASSERT_TRUE(transaction->status() == Electroneum::PendingTransaction::Status_Ok);
+                                                                             BitcoinFlame::PendingTransaction::Priority_Medium);
+    ASSERT_TRUE(transaction->status() == BitcoinFlame::PendingTransaction::Status_Ok);
     wallet1->refresh();
 
     ASSERT_TRUE(wallet1->balance() == balance);
@@ -597,33 +597,33 @@ TEST_F(WalletTest1, WalletTransactionWithPriority)
 
     std::string payment_id = "";
 
-    Electroneum::Wallet * wallet1 = wmgr->openWallet(CURRENT_SRC_WALLET, TESTNET_WALLET_PASS, true);
+    BitcoinFlame::Wallet * wallet1 = wmgr->openWallet(CURRENT_SRC_WALLET, TESTNET_WALLET_PASS, true);
 
     // make sure testnet daemon is running
     ASSERT_TRUE(wallet1->init(TESTNET_DAEMON_ADDRESS, 0));
     ASSERT_TRUE(wallet1->refresh());
     uint64_t balance = wallet1->balance();
-    ASSERT_TRUE(wallet1->status() == Electroneum::PendingTransaction::Status_Ok);
+    ASSERT_TRUE(wallet1->status() == BitcoinFlame::PendingTransaction::Status_Ok);
 
     std::string recepient_address = Utils::get_wallet_address(CURRENT_DST_WALLET, TESTNET_WALLET_PASS);
     uint32_t mixin = 0;
     uint64_t fee   = 0;
 
-    std::vector<Electroneum::PendingTransaction::Priority> priorities =  {
-         Electroneum::PendingTransaction::Priority_Low,
-         Electroneum::PendingTransaction::Priority_Medium,
-         Electroneum::PendingTransaction::Priority_High
+    std::vector<BitcoinFlame::PendingTransaction::Priority> priorities =  {
+         BitcoinFlame::PendingTransaction::Priority_Low,
+         BitcoinFlame::PendingTransaction::Priority_Medium,
+         BitcoinFlame::PendingTransaction::Priority_High
     };
 
     for (auto it = priorities.begin(); it != priorities.end(); ++it) {
         std::cerr << "Transaction priority: " << *it << std::endl;
-        Electroneum::PendingTransaction * transaction = wallet1->createTransaction(
+        BitcoinFlame::PendingTransaction * transaction = wallet1->createTransaction(
                     recepient_address, payment_id, AMOUNT_5XMR, mixin, *it);
         std::cerr << "Transaction status: " << transaction->status() << std::endl;
-        std::cerr << "Transaction fee: " << Electroneum::Wallet::displayAmount(transaction->fee()) << std::endl;
+        std::cerr << "Transaction fee: " << BitcoinFlame::Wallet::displayAmount(transaction->fee()) << std::endl;
         std::cerr << "Transaction error: " << transaction->errorString() << std::endl;
         ASSERT_TRUE(transaction->fee() > fee);
-        ASSERT_TRUE(transaction->status() == Electroneum::PendingTransaction::Status_Ok);
+        ASSERT_TRUE(transaction->status() == BitcoinFlame::PendingTransaction::Status_Ok);
         fee = transaction->fee();
         wallet1->disposeTransaction(transaction);
     }
@@ -636,11 +636,11 @@ TEST_F(WalletTest1, WalletTransactionWithPriority)
 
 TEST_F(WalletTest1, WalletHistory)
 {
-    Electroneum::Wallet * wallet1 = wmgr->openWallet(CURRENT_SRC_WALLET, TESTNET_WALLET_PASS, true);
+    BitcoinFlame::Wallet * wallet1 = wmgr->openWallet(CURRENT_SRC_WALLET, TESTNET_WALLET_PASS, true);
     // make sure testnet daemon is running
     ASSERT_TRUE(wallet1->init(TESTNET_DAEMON_ADDRESS, 0));
     ASSERT_TRUE(wallet1->refresh());
-    Electroneum::TransactionHistory * history = wallet1->history();
+    BitcoinFlame::TransactionHistory * history = wallet1->history();
     history->refresh();
     ASSERT_TRUE(history->count() > 0);
 
@@ -654,11 +654,11 @@ TEST_F(WalletTest1, WalletHistory)
 TEST_F(WalletTest1, WalletTransactionAndHistory)
 {
     return;
-    Electroneum::Wallet * wallet_src = wmgr->openWallet(CURRENT_SRC_WALLET, TESTNET_WALLET_PASS, true);
+    BitcoinFlame::Wallet * wallet_src = wmgr->openWallet(CURRENT_SRC_WALLET, TESTNET_WALLET_PASS, true);
     // make sure testnet daemon is running
     ASSERT_TRUE(wallet_src->init(TESTNET_DAEMON_ADDRESS, 0));
     ASSERT_TRUE(wallet_src->refresh());
-    Electroneum::TransactionHistory * history = wallet_src->history();
+    BitcoinFlame::TransactionHistory * history = wallet_src->history();
     history->refresh();
     ASSERT_TRUE(history->count() > 0);
     size_t count1 = history->count();
@@ -672,11 +672,11 @@ TEST_F(WalletTest1, WalletTransactionAndHistory)
     std::string wallet4_addr = Utils::get_wallet_address(CURRENT_DST_WALLET, TESTNET_WALLET_PASS);
 
 
-    Electroneum::PendingTransaction * tx = wallet_src->createTransaction(wallet4_addr,
+    BitcoinFlame::PendingTransaction * tx = wallet_src->createTransaction(wallet4_addr,
                                                                        PAYMENT_ID_EMPTY,
                                                                        AMOUNT_10XMR * 5, 1);
 
-    ASSERT_TRUE(tx->status() == Electroneum::PendingTransaction::Status_Ok);
+    ASSERT_TRUE(tx->status() == BitcoinFlame::PendingTransaction::Status_Ok);
     ASSERT_TRUE(tx->commit());
     history = wallet_src->history();
     history->refresh();
@@ -693,11 +693,11 @@ TEST_F(WalletTest1, WalletTransactionAndHistory)
 TEST_F(WalletTest1, WalletTransactionWithPaymentId)
 {
 
-    Electroneum::Wallet * wallet_src = wmgr->openWallet(CURRENT_SRC_WALLET, TESTNET_WALLET_PASS, true);
+    BitcoinFlame::Wallet * wallet_src = wmgr->openWallet(CURRENT_SRC_WALLET, TESTNET_WALLET_PASS, true);
     // make sure testnet daemon is running
     ASSERT_TRUE(wallet_src->init(TESTNET_DAEMON_ADDRESS, 0));
     ASSERT_TRUE(wallet_src->refresh());
-    Electroneum::TransactionHistory * history = wallet_src->history();
+    BitcoinFlame::TransactionHistory * history = wallet_src->history();
     history->refresh();
     ASSERT_TRUE(history->count() > 0);
     size_t count1 = history->count();
@@ -710,15 +710,15 @@ TEST_F(WalletTest1, WalletTransactionWithPaymentId)
 
     std::string wallet4_addr = Utils::get_wallet_address(CURRENT_DST_WALLET, TESTNET_WALLET_PASS);
 
-    std::string payment_id = Electroneum::Wallet::genPaymentId();
+    std::string payment_id = BitcoinFlame::Wallet::genPaymentId();
     ASSERT_TRUE(payment_id.length() == 16);
 
 
-    Electroneum::PendingTransaction * tx = wallet_src->createTransaction(wallet4_addr,
+    BitcoinFlame::PendingTransaction * tx = wallet_src->createTransaction(wallet4_addr,
                                                                        payment_id,
                                                                        AMOUNT_1XMR, 1);
 
-    ASSERT_TRUE(tx->status() == Electroneum::PendingTransaction::Status_Ok);
+    ASSERT_TRUE(tx->status() == BitcoinFlame::PendingTransaction::Status_Ok);
     ASSERT_TRUE(tx->commit());
     history = wallet_src->history();
     history->refresh();
@@ -739,10 +739,10 @@ TEST_F(WalletTest1, WalletTransactionWithPaymentId)
 }
 
 
-struct MyWalletListener : public Electroneum::WalletListener
+struct MyWalletListener : public BitcoinFlame::WalletListener
 {
 
-    Electroneum::Wallet * wallet;
+    BitcoinFlame::Wallet * wallet;
     uint64_t total_tx;
     uint64_t total_rx;
     boost::mutex  mutex;
@@ -759,7 +759,7 @@ struct MyWalletListener : public Electroneum::WalletListener
 
 
 
-    MyWalletListener(Electroneum::Wallet * wallet)
+    MyWalletListener(BitcoinFlame::Wallet * wallet)
         : total_tx(0), total_rx(0)
     {
         reset();
@@ -835,7 +835,7 @@ struct MyWalletListener : public Electroneum::WalletListener
 TEST_F(WalletTest2, WalletCallBackRefreshedSync)
 {
 
-    Electroneum::Wallet * wallet_src = wmgr->openWallet(CURRENT_SRC_WALLET, TESTNET_WALLET_PASS, true);
+    BitcoinFlame::Wallet * wallet_src = wmgr->openWallet(CURRENT_SRC_WALLET, TESTNET_WALLET_PASS, true);
     MyWalletListener * wallet_src_listener = new MyWalletListener(wallet_src);
     ASSERT_TRUE(wallet_src->init(TESTNET_DAEMON_ADDRESS, 0));
     ASSERT_TRUE(wallet_src_listener->refresh_triggered);
@@ -852,7 +852,7 @@ TEST_F(WalletTest2, WalletCallBackRefreshedSync)
 TEST_F(WalletTest2, WalletCallBackRefreshedAsync)
 {
 
-    Electroneum::Wallet * wallet_src = wmgr->openWallet(CURRENT_SRC_WALLET, TESTNET_WALLET_PASS, true);
+    BitcoinFlame::Wallet * wallet_src = wmgr->openWallet(CURRENT_SRC_WALLET, TESTNET_WALLET_PASS, true);
     MyWalletListener * wallet_src_listener = new MyWalletListener(wallet_src);
 
     boost::chrono::seconds wait_for = boost::chrono::seconds(20);
@@ -874,26 +874,26 @@ TEST_F(WalletTest2, WalletCallBackRefreshedAsync)
 TEST_F(WalletTest2, WalletCallbackSent)
 {
 
-    Electroneum::Wallet * wallet_src = wmgr->openWallet(CURRENT_SRC_WALLET, TESTNET_WALLET_PASS, true);
+    BitcoinFlame::Wallet * wallet_src = wmgr->openWallet(CURRENT_SRC_WALLET, TESTNET_WALLET_PASS, true);
     // make sure testnet daemon is running
     ASSERT_TRUE(wallet_src->init(TESTNET_DAEMON_ADDRESS, 0));
     ASSERT_TRUE(wallet_src->refresh());
     MyWalletListener * wallet_src_listener = new MyWalletListener(wallet_src);
     uint64_t balance = wallet_src->balance();
     std::cout << "** Balance: " << wallet_src->displayAmount(wallet_src->balance()) <<  std::endl;
-    Electroneum::Wallet * wallet_dst = wmgr->openWallet(CURRENT_DST_WALLET, TESTNET_WALLET_PASS, true);
+    BitcoinFlame::Wallet * wallet_dst = wmgr->openWallet(CURRENT_DST_WALLET, TESTNET_WALLET_PASS, true);
 
     uint64_t amount = AMOUNT_1XMR * 5;
-    std::cout << "** Sending " << Electroneum::Wallet::displayAmount(amount) << " to " << wallet_dst->address();
+    std::cout << "** Sending " << BitcoinFlame::Wallet::displayAmount(amount) << " to " << wallet_dst->address();
 
 
-    Electroneum::PendingTransaction * tx = wallet_src->createTransaction(wallet_dst->address(),
+    BitcoinFlame::PendingTransaction * tx = wallet_src->createTransaction(wallet_dst->address(),
                                                                        PAYMENT_ID_EMPTY,
                                                                        amount, 1);
-    std::cout << "** Committing transaction: " << Electroneum::Wallet::displayAmount(tx->amount())
-              << " with fee: " << Electroneum::Wallet::displayAmount(tx->fee());
+    std::cout << "** Committing transaction: " << BitcoinFlame::Wallet::displayAmount(tx->amount())
+              << " with fee: " << BitcoinFlame::Wallet::displayAmount(tx->fee());
 
-    ASSERT_TRUE(tx->status() == Electroneum::PendingTransaction::Status_Ok);
+    ASSERT_TRUE(tx->status() == BitcoinFlame::PendingTransaction::Status_Ok);
     ASSERT_TRUE(tx->commit());
 
     boost::chrono::seconds wait_for = boost::chrono::seconds(60*3);
@@ -913,13 +913,13 @@ TEST_F(WalletTest2, WalletCallbackSent)
 TEST_F(WalletTest2, WalletCallbackReceived)
 {
 
-    Electroneum::Wallet * wallet_src = wmgr->openWallet(CURRENT_SRC_WALLET, TESTNET_WALLET_PASS, true);
+    BitcoinFlame::Wallet * wallet_src = wmgr->openWallet(CURRENT_SRC_WALLET, TESTNET_WALLET_PASS, true);
     // make sure testnet daemon is running
     ASSERT_TRUE(wallet_src->init(TESTNET_DAEMON_ADDRESS, 0));
     ASSERT_TRUE(wallet_src->refresh());
     std::cout << "** Balance src1: " << wallet_src->displayAmount(wallet_src->balance()) <<  std::endl;
 
-    Electroneum::Wallet * wallet_dst = wmgr->openWallet(CURRENT_DST_WALLET, TESTNET_WALLET_PASS, true);
+    BitcoinFlame::Wallet * wallet_dst = wmgr->openWallet(CURRENT_DST_WALLET, TESTNET_WALLET_PASS, true);
     ASSERT_TRUE(wallet_dst->init(TESTNET_DAEMON_ADDRESS, 0));
     ASSERT_TRUE(wallet_dst->refresh());
     uint64_t balance = wallet_dst->balance();
@@ -927,15 +927,15 @@ TEST_F(WalletTest2, WalletCallbackReceived)
     std::unique_ptr<MyWalletListener> wallet_dst_listener (new MyWalletListener(wallet_dst));
 
     uint64_t amount = AMOUNT_1XMR * 5;
-    std::cout << "** Sending " << Electroneum::Wallet::displayAmount(amount) << " to " << wallet_dst->address();
-    Electroneum::PendingTransaction * tx = wallet_src->createTransaction(wallet_dst->address(),
+    std::cout << "** Sending " << BitcoinFlame::Wallet::displayAmount(amount) << " to " << wallet_dst->address();
+    BitcoinFlame::PendingTransaction * tx = wallet_src->createTransaction(wallet_dst->address(),
                                                                        PAYMENT_ID_EMPTY,
                                                                        amount, 1);
 
-    std::cout << "** Committing transaction: " << Electroneum::Wallet::displayAmount(tx->amount())
-              << " with fee: " << Electroneum::Wallet::displayAmount(tx->fee());
+    std::cout << "** Committing transaction: " << BitcoinFlame::Wallet::displayAmount(tx->amount())
+              << " with fee: " << BitcoinFlame::Wallet::displayAmount(tx->fee());
 
-    ASSERT_TRUE(tx->status() == Electroneum::PendingTransaction::Status_Ok);
+    ASSERT_TRUE(tx->status() == BitcoinFlame::PendingTransaction::Status_Ok);
     ASSERT_TRUE(tx->commit());
 
     boost::chrono::seconds wait_for = boost::chrono::seconds(60*4);
@@ -960,7 +960,7 @@ TEST_F(WalletTest2, WalletCallbackReceived)
 TEST_F(WalletTest2, WalletCallbackNewBlock)
 {
 
-    Electroneum::Wallet * wallet_src = wmgr->openWallet(TESTNET_WALLET5_NAME, TESTNET_WALLET_PASS, true);
+    BitcoinFlame::Wallet * wallet_src = wmgr->openWallet(TESTNET_WALLET5_NAME, TESTNET_WALLET_PASS, true);
     // make sure testnet daemon is running
     ASSERT_TRUE(wallet_src->init(TESTNET_DAEMON_ADDRESS, 0));
     ASSERT_TRUE(wallet_src->refresh());
@@ -987,7 +987,7 @@ TEST_F(WalletTest2, WalletCallbackNewBlock)
 TEST_F(WalletManagerMainnetTest, CreateOpenAndRefreshWalletMainNetSync)
 {
 
-    Electroneum::Wallet * wallet = wmgr->createWallet(WALLET_NAME_MAINNET, "", WALLET_LANG);
+    BitcoinFlame::Wallet * wallet = wmgr->createWallet(WALLET_NAME_MAINNET, "", WALLET_LANG);
     std::unique_ptr<MyWalletListener> wallet_listener (new MyWalletListener(wallet));
     wallet->init(MAINNET_DAEMON_ADDRESS, 0);
     std::cerr << "TEST: waiting on refresh lock...\n";
@@ -1006,7 +1006,7 @@ TEST_F(WalletManagerMainnetTest, CreateAndRefreshWalletMainNetAsync)
     // supposing 120 seconds should be enough for fast refresh
     int SECONDS_TO_REFRESH = 120;
 
-    Electroneum::Wallet * wallet = wmgr->createWallet(WALLET_NAME_MAINNET, "", WALLET_LANG);
+    BitcoinFlame::Wallet * wallet = wmgr->createWallet(WALLET_NAME_MAINNET, "", WALLET_LANG);
     std::unique_ptr<MyWalletListener> wallet_listener (new MyWalletListener(wallet));
 
     boost::chrono::seconds wait_for = boost::chrono::seconds(SECONDS_TO_REFRESH);
@@ -1016,7 +1016,7 @@ TEST_F(WalletManagerMainnetTest, CreateAndRefreshWalletMainNetAsync)
     std::cerr << "TEST: waiting on refresh lock...\n";
     wallet_listener->cv_refresh.wait_for(lock, wait_for);
     std::cerr << "TEST: refresh lock acquired...\n";
-    ASSERT_TRUE(wallet->status() == Electroneum::Wallet::Status_Ok);
+    ASSERT_TRUE(wallet->status() == BitcoinFlame::Wallet::Status_Ok);
     ASSERT_TRUE(wallet_listener->refresh_triggered);
     ASSERT_TRUE(wallet->connected());
     ASSERT_TRUE(wallet->blockChainHeight() == wallet->daemonBlockChainHeight());
@@ -1029,7 +1029,7 @@ TEST_F(WalletManagerMainnetTest, OpenAndRefreshWalletMainNetAsync)
 
     // supposing 120 seconds should be enough for fast refresh
     int SECONDS_TO_REFRESH = 120;
-    Electroneum::Wallet * wallet = wmgr->createWallet(WALLET_NAME_MAINNET, "", WALLET_LANG);
+    BitcoinFlame::Wallet * wallet = wmgr->createWallet(WALLET_NAME_MAINNET, "", WALLET_LANG);
     wmgr->closeWallet(wallet);
     wallet = wmgr->openWallet(WALLET_NAME_MAINNET, "");
 
@@ -1042,7 +1042,7 @@ TEST_F(WalletManagerMainnetTest, OpenAndRefreshWalletMainNetAsync)
     std::cerr << "TEST: waiting on refresh lock...\n";
     wallet_listener->cv_refresh.wait_for(lock, wait_for);
     std::cerr << "TEST: refresh lock acquired...\n";
-    ASSERT_TRUE(wallet->status() == Electroneum::Wallet::Status_Ok);
+    ASSERT_TRUE(wallet->status() == BitcoinFlame::Wallet::Status_Ok);
     ASSERT_TRUE(wallet_listener->refresh_triggered);
     ASSERT_TRUE(wallet->connected());
     ASSERT_TRUE(wallet->blockChainHeight() == wallet->daemonBlockChainHeight());
@@ -1056,7 +1056,7 @@ TEST_F(WalletManagerMainnetTest, RecoverAndRefreshWalletMainNetAsync)
 
     // supposing 120 seconds should be enough for fast refresh
     int SECONDS_TO_REFRESH = 120;
-    Electroneum::Wallet * wallet = wmgr->createWallet(WALLET_NAME_MAINNET, "", WALLET_LANG);
+    BitcoinFlame::Wallet * wallet = wmgr->createWallet(WALLET_NAME_MAINNET, "", WALLET_LANG);
     std::string seed = wallet->seed();
     std::string address = wallet->address();
     wmgr->closeWallet(wallet);
@@ -1066,7 +1066,7 @@ TEST_F(WalletManagerMainnetTest, RecoverAndRefreshWalletMainNetAsync)
     // ..and recovering wallet from seed
 
     wallet = wmgr->recoveryWallet(WALLET_NAME_MAINNET, seed);
-    ASSERT_TRUE(wallet->status() == Electroneum::Wallet::Status_Ok);
+    ASSERT_TRUE(wallet->status() == BitcoinFlame::Wallet::Status_Ok);
     ASSERT_TRUE(wallet->address() == address);
     std::unique_ptr<MyWalletListener> wallet_listener (new MyWalletListener(wallet));
     boost::chrono::seconds wait_for = boost::chrono::seconds(SECONDS_TO_REFRESH);
@@ -1079,7 +1079,7 @@ TEST_F(WalletManagerMainnetTest, RecoverAndRefreshWalletMainNetAsync)
     // as it needs much more than 120 seconds for mainnet
 
     wallet_listener->cv_refresh.wait_for(lock, wait_for);
-    ASSERT_TRUE(wallet->status() == Electroneum::Wallet::Status_Ok);
+    ASSERT_TRUE(wallet->status() == BitcoinFlame::Wallet::Status_Ok);
     ASSERT_FALSE(wallet_listener->refresh_triggered);
     ASSERT_TRUE(wallet->connected());
     ASSERT_FALSE(wallet->blockChainHeight() == wallet->daemonBlockChainHeight());
@@ -1124,6 +1124,6 @@ int main(int argc, char** argv)
     CURRENT_DST_WALLET = TESTNET_WALLET1_NAME;
 
     ::testing::InitGoogleTest(&argc, argv);
-    Electroneum::WalletManagerFactory::setLogLevel(Electroneum::WalletManagerFactory::LogLevel_Max);
+    BitcoinFlame::WalletManagerFactory::setLogLevel(BitcoinFlame::WalletManagerFactory::LogLevel_Max);
     return RUN_ALL_TESTS();
 }

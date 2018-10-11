@@ -31,8 +31,8 @@
 #include "levin_base.h"
 #include "serializeble_struct_helper.h"
 
-#undef ELECTRONEUM_DEFAULT_LOG_CATEGORY
-#define ELECTRONEUM_DEFAULT_LOG_CATEGORY "net"
+#undef BITCOINFLAME_DEFAULT_LOG_CATEGORY
+#define BITCOINFLAME_DEFAULT_LOG_CATEGORY "net"
 
 namespace epee
 {

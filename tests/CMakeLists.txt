@@ -1,4 +1,4 @@
-# Copyright (c) 2017-2018, The Electroneum Project
+# Copyright (c) 2017-2018, The BitcoinFlame Project
 # Copyright (c) 2014-2017, The Monero Project
 # 
 # All rights reserved.
@@ -73,8 +73,8 @@ file(COPY
   data/wallet_9svHk1.keys
   data/wallet_9svHk1
   data/outputs
-  data/unsigned_electroneum_tx
-  data/signed_electroneum_tx
+  data/unsigned_BitcoinFlame_tx
+  data/signed_BitcoinFlame_tx
   DESTINATION data)
 
 add_subdirectory(core_tests)

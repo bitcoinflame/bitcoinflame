@@ -1,4 +1,4 @@
-// Copyrights(c) 2017-2018, The Electroneum Project
+// Copyrights(c) 2017-2018, The BitcoinFlame Project
 // Copyrights(c) 2014-2017, The Monero Project
 // 
 // All rights reserved.
@@ -176,7 +176,7 @@ namespace daemonizer
     }
     else // interactive
     {
-      //LOG_PRINT_L0("Electroneum '" << ELECTRONEUM_RELEASE_NAME << "' (v" << ELECTRONEUM_VERSION_FULL);
+      //LOG_PRINT_L0("BitcoinFlame '" << BITCOINFLAME_RELEASE_NAME << "' (v" << BITCOINFLAME_VERSION_FULL);
       return executor.run_interactive(vm);
     }
 

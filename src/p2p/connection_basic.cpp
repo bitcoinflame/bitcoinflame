@@ -1,8 +1,8 @@
 /// @file
-/// @author rfree (current maintainer in electroneum.cc project)
+/// @author rfree (current maintainer in BitcoinFlame.cc project)
 /// @brief base for connection, contains e.g. the ratelimit hooks
 
-// Copyrights(c) 2017-2018, The Electroneum Project
+// Copyrights(c) 2017-2018, The BitcoinFlame Project
 // Copyrights(c) 2014-2017, The Monero Project
 // 
 // All rights reserved.
@@ -81,8 +81,8 @@
 #include "network_throttle-detail.hpp"
 #include "cryptonote_core/cryptonote_core.h"
 
-#undef ELECTRONEUM_DEFAULT_LOG_CATEGORY
-#define ELECTRONEUM_DEFAULT_LOG_CATEGORY "net.p2p"
+#undef BITCOINFLAME_DEFAULT_LOG_CATEGORY
+#define BITCOINFLAME_DEFAULT_LOG_CATEGORY "net.p2p"
 
 // ################################################################################################
 // local (TU local) headers
@@ -163,7 +163,7 @@ connection_basic::connection_basic(boost::asio::io_service& io_service, std::ato
 	try { boost::system::error_code e; remote_addr_str = socket_.remote_endpoint(e).address().to_string(); } catch(...){} ;
 
 	_note("Spawned connection p2p#"<<mI->m_peer_number<<" to " << remote_addr_str << " currently we have sockets count:" << m_ref_sock_count);
-	//boost::filesystem::create_directories("log/dr-electroneum/net/");
+	//boost::filesystem::create_directories("log/dr-BitcoinFlame/net/");
 }
 
 connection_basic::~connection_basic() noexcept(false) {

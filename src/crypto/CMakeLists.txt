@@ -1,4 +1,4 @@
-# Copyright (c) 2017-2018, The Electroneum Project
+# Copyright (c) 2017-2018, The BitcoinFlame Project
 # Copyright (c) 2014-2017, The Monero Project
 #
 # All rights reserved.
@@ -69,9 +69,9 @@ set(crypto_private_headers
   skein.h
   skein_port.h)
 
-electroneum_private_headers(cncrypto
+BitcoinFlame_private_headers(cncrypto
   ${crypto_private_headers})
-electroneum_add_library(cncrypto
+BitcoinFlame_add_library(cncrypto
   ${crypto_sources}
   ${crypto_headers}
   ${crypto_private_headers})

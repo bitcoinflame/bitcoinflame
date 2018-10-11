@@ -1,4 +1,4 @@
-# Copyright (c) 2017-2018, The Electroneum Project
+# Copyright (c) 2017-2018, The BitcoinFlame Project
 # Copyright (c) 2014-2017, The Monero Project
 #
 # All rights reserved.
@@ -60,9 +60,9 @@ set(cryptonote_basic_private_headers
   tx_extra.h
   verification_context.h)
 
-electroneum_private_headers(cryptonote_basic
+BitcoinFlame_private_headers(cryptonote_basic
   ${crypto_private_headers})
-electroneum_add_library(cryptonote_basic
+BitcoinFlame_add_library(cryptonote_basic
   ${cryptonote_basic_sources}
   ${cryptonote_basic_headers}
   ${cryptonote_basic_private_headers})

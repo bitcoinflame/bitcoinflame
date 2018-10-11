@@ -1,15 +1,14 @@
 
 # BitcoinFlame
 
-Copyright (c) 2018-2019, The BitcoinFlame Project
-Copyright (c) 2017-2018, The Electroneum Project
+Copyright (c) 2017-2018, The BitcoinFlame Project
 Copyright (c) 2014-2017, The Monero Project  
 Portions Copyright (c) 2012-2013, The Cryptonote developers  
 
 ## Development Resources
 
-- Web: [BitcoinFlame.com](https://bitcoinFlame.xyz)
-- GitHub: [https://github.com/bitcoinflame/bitcoinflame](https://github.com/bitcoinflame/bitcoinflame)
+- Web: [BitcoinFlame.com](https://BitcoinFlame.com)
+- GitHub: [https://github.com/BitcoinFlame/BitcoinFlame](https://github.com/BitcoinFlame/BitcoinFlame)
 
 ## Introduction
 

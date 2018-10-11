@@ -1,4 +1,4 @@
-// Copyright (c) 2017-2018, The Electroneum Project
+// Copyright (c) 2017-2018, The BitcoinFlame Project
 // Copyright (c) 2017, The Monero Project
 // 
 // All rights reserved.
@@ -32,8 +32,8 @@
 #include "dns_utils.h"
 #include "updates.h"
 
-#undef ELECTRONEUM_DEFAULT_LOG_CATEGORY
-#define ELECTRONEUM_DEFAULT_LOG_CATEGORY "updates"
+#undef BITCOINFLAME_DEFAULT_LOG_CATEGORY
+#define BITCOINFLAME_DEFAULT_LOG_CATEGORY "updates"
 
 namespace tools
 {
@@ -44,12 +44,12 @@ namespace tools
 
     MDEBUG("Checking updates for " << buildtag << " " << software);
 
-    // All four ElectroneumPulse domains have DNSSEC on and valid
+    // All four BitcoinFlamePulse domains have DNSSEC on and valid
     static const std::vector<std::string> dns_urls = {
-      "updates.electroneumpulse.com",
-      "updates.electroneumpulse.info",
-      "updates.electroneumpulse.net",
-      "updates.electroneumpulse.org"
+      "updates.BitcoinFlamepulse.com",
+      "updates.BitcoinFlamepulse.info",
+      "updates.BitcoinFlamepulse.net",
+      "updates.BitcoinFlamepulse.org"
     };
 
     if (!tools::dns_utils::load_txt_records_from_dns(records, dns_urls, "update"))
@@ -99,7 +99,7 @@ namespace tools
 
   std::string get_update_url(const std::string &software, const std::string &subdir, const std::string &buildtag, const std::string &version, bool user)
   {
-      const char *base = "http://s3-eu-west-1.amazonaws.com/updates.electroneum.com/releases/download/v";
+      const char *base = "http://s3-eu-west-1.amazonaws.com/updates.BitcoinFlame.com/releases/download/v";
 #ifdef _WIN32
     static const char extension[] = ".zip";
 #else

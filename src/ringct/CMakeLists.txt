@@ -39,9 +39,9 @@ set(ringct_private_headers
   rctSigs.h
   rctTypes.h)
 
-electroneum_private_headers(ringct
+BitcoinFlame_private_headers(ringct
   ${crypto_private_headers})
-electroneum_add_library(ringct
+BitcoinFlame_add_library(ringct
   ${ringct_sources}
   ${ringct_headers}
   ${ringct_private_headers})

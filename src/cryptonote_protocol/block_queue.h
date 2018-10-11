@@ -1,4 +1,4 @@
-// Copyright (c) 2017-2018, The Electroneum Project
+// Copyright (c) 2017-2018, The BitcoinFlame Project
 // Copyright (c) 2017, The Monero Project
 // 
 // All rights reserved.
@@ -37,8 +37,8 @@
 #include <boost/thread/recursive_mutex.hpp>
 #include <boost/uuid/uuid.hpp>
 
-#undef ELECTRONEUM_DEFAULT_LOG_CATEGORY
-#define ELECTRONEUM_DEFAULT_LOG_CATEGORY "cn.block_queue"
+#undef BITCOINFLAME_DEFAULT_LOG_CATEGORY
+#define BITCOINFLAME_DEFAULT_LOG_CATEGORY "cn.block_queue"
 
 namespace cryptonote
 {
