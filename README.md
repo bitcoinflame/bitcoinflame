@@ -1,7 +1,7 @@
 
 # BitcoinFlame
-
-Copyright (c) 2017-2018, The BitcoinFlame Project
+Copyright (c) 2018-2019, The BitcoinFlame Project
+Copyright (c) 2017-2018, The Electroneum Project
 Copyright (c) 2014-2017, The Monero Project  
 Portions Copyright (c) 2012-2013, The Cryptonote developers  
 
